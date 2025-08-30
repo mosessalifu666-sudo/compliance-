@@ -71,7 +71,6 @@
         <p class="text-sm text-[var(--muted)] mt-4">Resolving compliance, payments and security issues. Please share case details to proceed.</p>
 
         <div class="mt-6 grid gap-3">
-          <!-- dashboard WhatsApp button now toggles staff popup (calls openForm when user clicks Start Chat in widget) -->
           <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
             <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
           </button>
@@ -145,12 +144,13 @@
           </div>
           <div>
             <label class="block text-sm text-gray-700">Store URL</label>
-            <!-- optional now -->
-            <input id="storeInput" type="url" class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="https://yourstore.myshopify.com" />
+            <!-- changed url → text (no browser URL formatting requirement) -->
+            <input id="storeInput" type="text" class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="yourstore.myshopify.com" />
           </div>
           <div>
             <label class="block text-sm text-gray-700">Email address</label>
-            <input id="emailInput" type="email" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="you@example.com" />
+            <!-- changed email → text (no browser email-format requirement) -->
+            <input id="emailInput" type="text" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="you@example.com" />
           </div>
           <div>
             <label class="block text-sm text-gray-700">Issue type</label>
@@ -233,7 +233,6 @@
         clearInterval(t);
         loading.classList.add('hidden');
         dashboard.classList.remove('hidden');
-        // preserve stepper init if present
         if (typeof initStepper === 'function') initStepper(2);
       }
     },110);
@@ -284,9 +283,11 @@
       if (contactForm) contactForm.reset();
     }
 
-    // close modal on outside click or Escape
+    // close modal on button click
     const modalCloseBtn = document.getElementById('modalCloseBtn') || document.getElementById('cancelBtn');
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeForm);
+
+    // close modal on outside click (click outside modal content)
     document.addEventListener('click', function(e){
       if (modal && !modal.classList.contains('hidden')) {
         const wrapper = modal.querySelector('.card, .animate-fade-in') || modal.firstElementChild;
@@ -295,17 +296,19 @@
         }
       }
     });
+
+    // escape key closes modal and staff popup
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') {
-        // close modal and staff popup if open
         if (modal && !modal.classList.contains('hidden')) closeForm();
         if (waPopup && !waPopup.classList.contains('hidden')) waPopup.classList.add('hidden');
       }
     });
 
-    /* ---------- Submission handler (fixed) ---------- */
+    /* ---------- Submission handler ---------- */
     function handleSubmit(e) {
       e.preventDefault();
+
       const method = (methodField && methodField.value) ? methodField.value : 'whatsapp';
       const storeRaw = (document.getElementById('storeInput') || {}).value || '';
       const store = storeRaw.trim();
@@ -315,7 +318,7 @@
       const messageRaw = (document.getElementById('messageInput') || {}).value || '';
       const message = messageRaw.trim() || "Hi, I need help with my Shopify store";
 
-      const body = 
+      const body =
         `New Support Request\n\n` +
         `Name: ${name}\n` +
         `Email: ${email}\n` +
@@ -325,22 +328,24 @@
 
       const encoded = encodeURIComponent(body);
 
-      // === Platform URLs ===
+      // === Platform URLs / placeholders (replace these with your real info) ===
       // Replace YOUR_WHATSAPP_NUMBER with your number (digits only, country code included)
       const WHATSAPP_NUMBER = 'YOUR_WHATSAPP_NUMBER';
+      // Replace with the email address you want to receive support messages at
       const SUPPORT_EMAIL = 'YOUR_EMAIL@example.com';
-      const TELEGRAM_SHARE_URL = 'https://shopify.com'; // optional URL used in Telegram share
+      // Optional URL used when sharing to Telegram
+      const TELEGRAM_SHARE_URL = 'https://shopify.com';
 
       let url = '';
       if (method === 'whatsapp') {
         if (!WHATSAPP_NUMBER || WHATSAPP_NUMBER === 'YOUR_WHATSAPP_NUMBER') {
-          // fallback: open wa.me without number (not recommended) — we'll still try to open default
+          // fallback: open wa.me share without a number (lets user pick)
           url = `https://wa.me/?text=${encoded}`;
         } else {
           url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
         }
       } else if (method === 'telegram') {
-        // t.me/share/url supports text param
+        // t.me/share/url supports url and text params
         url = `https://t.me/share/url?url=${encodeURIComponent(TELEGRAM_SHARE_URL)}&text=${encoded}`;
       } else if (method === 'email') {
         // mailto: to SUPPORT_EMAIL (replace placeholder)
@@ -410,7 +415,6 @@
         }
       }
     });
-
   </script>
 </body>
 </html>
