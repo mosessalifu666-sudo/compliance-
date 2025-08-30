@@ -120,8 +120,8 @@ body{background:var(--bg);color:#0f172a}
 </main>
 
 <!-- Modal Contact Form -->
-<div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
-  <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in">
+<div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 px-4">
+  <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in sm:px-6 sm:py-6">
     <div class="flex items-start justify-between">
       <div>
         <h3 class="text-lg font-semibold">Contact Advisor</h3>
@@ -152,7 +152,7 @@ body{background:var(--bg);color:#0f172a}
             <option>Compliance Warning</option>
             <option>Checkout or Payment Issues</option>
             <option>Store Visibility / SEO</option>
-            <option>Security or Fraud</option>
+            <option>Sales Performance</option>
             <option>Other</option>
           </select>
         </div>
@@ -246,16 +246,17 @@ function closeForm(){
 function handleSubmit(e){
   e.preventDefault();
   const method = methodField.value;
+  const ticket = document.getElementById('ticketInput').value;  // Added ticket
   const store = document.getElementById('storeInput').value;
   const email = document.getElementById('emailInput').value;
   const issue = document.getElementById('issueInput').value;
   const name = document.getElementById('nameInput').value;
   const message = document.getElementById('messageInput').value;
   let url='';
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nStore: ${store}\nIssue: ${issue}\nMessage: ${message}`);
-  if(method==='whatsapp') url=`https://wa.me/2349135251130?text=${body}`;
-  else if(method==='telegram') url=`https://t.me/yourtelegramusername`;
-  else if(method==='email') url=`mailto:your-email@gmail.com?subject=Support Request&body=${body}`;
+  const body = encodeURIComponent(Ticket: ${ticket}\nName: ${name}\nEmail: ${email}\nStore: ${store}\nIssue: ${issue}\nMessage: ${message});
+  if(method==='whatsapp') url=https://wa.me/2349135251130?text=${body};
+  else if(method==='telegram') url=https://t.me/yourtelegramusername;
+  else if(method==='email') url=mailto:your-email@gmail.com?subject=Support Request&body=${body};
   window.open(url,'_blank');
 }
 </script>
