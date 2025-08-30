@@ -284,15 +284,25 @@
     }
 
     // close modal on button click
-    const modalCloseBtn = document.getElementById('modalCloseBtn') || document.getElementById('cancelBtn');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
     if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeForm);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeForm);
 
-    // close modal on outside click (click outside modal content)
+    // close modal & popup on outside click
     document.addEventListener('click', function(e){
+      // If modal is open and click is outside modal content -> close
       if (modal && !modal.classList.contains('hidden')) {
         const wrapper = modal.querySelector('.card, .animate-fade-in') || modal.firstElementChild;
         if (wrapper && !wrapper.contains(e.target) && !e.target.matches('#waTriggerBtn, #waTriggerBtn *')) {
           closeForm();
+        }
+      }
+      // If staff popup is open and click is outside it and not on trigger -> hide
+      if (waPopup && !waPopup.classList.contains('hidden')) {
+        const trigger = document.getElementById('waTriggerBtn');
+        if (!waPopup.contains(e.target) && !(trigger && trigger.contains(e.target))) {
+          waPopup.classList.add('hidden');
         }
       }
     });
@@ -319,22 +329,26 @@
       const message = messageRaw.trim() || "Hi, I need help with my Shopify store";
 
       const body =
-        `New Support Request\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Store: ${store || "(not provided)"}\n` +
-        `Issue: ${issue}\n\n` +
+        `New Support Request
+
+` +
+        `Name: ${name}
+` +
+        `Email: ${email}
+` +
+        `Store: ${store || "(not provided)"}
+` +
+        `Issue: ${issue}
+
+` +
         `${message}`;
 
       const encoded = encodeURIComponent(body);
 
-      // === Platform URLs / placeholders (replace these with your real info) ===
-      // Replace YOUR_WHATSAPP_NUMBER with your number (digits only, country code included)
-      const WHATSAPP_NUMBER = 'YOUR_WHATSAPP_NUMBER';
-      // Replace with the email address you want to receive support messages at
-      const SUPPORT_EMAIL = 'YOUR_EMAIL@example.com';
-      // Optional URL used when sharing to Telegram
-      const TELEGRAM_SHARE_URL = 'https://shopify.com';
+      // === Platform URLs / your real handles ===
+      const WHATSAPP_NUMBER = 'YOUR_WHATSAPP_NUMBER'; // replace with your number + country code, e.g. 15551234567
+      const SUPPORT_EMAIL = 'juan.shopifyagent@gmail.com';
+      const TELEGRAM_USERNAME = 'merchanthelpsupport';
 
       let url = '';
       if (method === 'whatsapp') {
@@ -345,10 +359,10 @@
           url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
         }
       } else if (method === 'telegram') {
-        // t.me/share/url supports url and text params
-        url = `https://t.me/share/url?url=${encodeURIComponent(TELEGRAM_SHARE_URL)}&text=${encoded}`;
+        // direct chat to username with prefilled text
+        url = `https://t.me/${TELEGRAM_USERNAME}?text=${encoded}`;
       } else if (method === 'email') {
-        // mailto: to SUPPORT_EMAIL (replace placeholder)
+        // mailto: to SUPPORT_EMAIL
         url = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('New Support Request')}&body=${encoded}`;
       }
 
@@ -407,14 +421,8 @@
     if (waTelegramBtn) waTelegramBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleWaPopup(false); openForm('telegram'); });
     if (waEmailBtn) waEmailBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleWaPopup(false); openForm('email'); });
 
-    // clicking outside staff popup closes it
-    document.addEventListener('click', function(e){
-      if (waPopup && !waPopup.classList.contains('hidden')) {
-        if (!waPopup.contains(e.target) && !waTriggerBtn.contains(e.target)) {
-          toggleWaPopup(false);
-        }
-      }
-    });
+    // clicking outside staff popup closes it (handled in single document click listener above)
+
   </script>
 </body>
 </html>
