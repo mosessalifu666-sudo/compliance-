@@ -18,11 +18,27 @@
     .step-line{height:2px;background:var(--border);flex:1}
     .step-line.active{background:var(--green)}
     .card{background:white;border:1px solid var(--border);border-radius:12px}
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    /* widget animation + basic "card" styling (kept minimal so it won't conflict) */
+    .wa-card {
+      width: 20rem; /* same as w-80 */
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.12);
+      border: 1px solid rgba(229,231,235,1);
+      transform-origin: 100% 100%;
+      transition: opacity .16s ease, transform .18s cubic-bezier(.2,.9,.2,1);
+      opacity: 0;
+      transform: translateY(8px) scale(.98);
+      pointer-events: none;
     }
-    .animate-fade-in { animation: fadeIn 0.25s ease-out; }
+    .wa-card.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    /* small close button style inside header to match look */
+    .wa-close { background: transparent; border: none; color: rgba(255,255,255,.9); font-size: 1rem; cursor: pointer; }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -70,7 +86,11 @@
         <p class="text-sm text-[var(--muted)] mt-4">Resolving compliance, payments and security issues. Please share case details to proceed.</p>
 
         <div class="mt-6 grid gap-3">
-          <!-- Removed dashboard WhatsApp button -->
+          <!-- CHANGED: the WhatsApp button now toggles the friend-style widget instead of calling openForm() directly -->
+          <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring" aria-controls="waWidget" aria-expanded="false">
+            <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
+          </button>
+
           <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--teal)] text-white py-2.5 rounded-md focus-ring">
             <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
           </button>
@@ -85,46 +105,133 @@
         </div>
       </aside>
 
-      <!-- Right column (unchanged) -->
+      <!-- Right column -->
       <section class="lg:col-span-2 space-y-6">
-        <!-- ... existing cards ... -->
+        <div class="card p-6">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-sm text-[var(--muted)]">Ticket</div>
+              <div class="text-xl font-semibold">#SA02-2097</div>
+            </div>
+            <div class="text-sm text-[var(--muted)]">
+              <div>Partner ID: <span class="font-medium">3855889</span></div>
+              <div class="mt-1">Status: <span class="text-green-700 font-medium">Active</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold">Case Progress</h3>
+            <div id="progressLabel" class="text-sm text-[var(--muted)]">Step 2 of 4</div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="step"><div id="dot-1" class="step-dot">1</div><div class="text-sm ml-2">Case Created</div></div>
+            <div id="line-1" class="step-line"></div>
+            <div class="step"><div id="dot-2" class="step-dot">2</div><div class="text-sm ml-2">Advisor Assigned</div></div>
+            <div id="line-2" class="step-line"></div>
+            <div class="step"><div id="dot-3" class="step-dot">3</div><div class="text-sm ml-2">Pending Review</div></div>
+            <div id="line-3" class="step-line"></div>
+            <div class="step"><div id="dot-4" class="step-dot">4</div><div class="text-sm ml-2">Active</div></div>
+          </div>
+        </div>
       </section>
     </div>
   </main>
 
-  <!-- WhatsApp Floating Widget -->
-  <div id="whatsappPopup" class="fixed bottom-20 right-6 w-80 hidden z-50">
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden animate-fade-in">
-      <!-- Header with staff -->
-      <div class="bg-[var(--green)] text-white px-4 py-3 flex items-center gap-3">
-        <img src="https://i.ibb.co/vLJ1QWy/staff.jpg" alt="Advisor" class="w-10 h-10 rounded-full border-2 border-white">
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 modal">
+    <div class="bg-white w-full max-w-2xl rounded-lg p-6 card">
+      <div class="flex items-start justify-between">
         <div>
-          <div class="font-semibold">Juan Manuel</div>
-          <div class="text-xs opacity-90">Shopify Compliance Specialist</div>
+          <h3 class="text-lg font-semibold">Contact Advisor</h3>
+          <div class="text-sm text-[var(--muted)]">Ticket <span id="ticketRef" class="font-medium">#SA02-2097</span></div>
         </div>
+        <button aria-label="Close" onclick="closeForm()" class="text-gray-500 hover:text-gray-800"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <!-- Body -->
+
+      <form id="contactForm" class="mt-4 space-y-4" onsubmit="handleSubmit(event)">
+        <input type="hidden" id="methodField" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-gray-700">Ticket ID</label>
+            <input id="ticketInput" type="text" value="#SA02-2097" readonly class="w-full border border-[var(--border)] rounded-md px-3 py-2 bg-gray-50 text-sm" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Store URL</label>
+            <input id="storeInput" type="url" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="https://yourstore.myshopify.com" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Email address</label>
+            <input id="emailInput" type="email" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="you@example.com" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Issue type</label>
+            <select id="issueInput" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm">
+              <option value="">Select an issue</option>
+              <option>Compliance Warning</option>
+              <option>Checkout or Payment Issues</option>
+              <option>Store Visibility / SEO</option>
+              <option>Security or Fraud</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm text-gray-700">Your name</label>
+          <input id="nameInput" type="text" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Message</label>
+          <textarea id="messageInput" rows="4" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="Summary of the issue..."></textarea>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" onclick="closeForm()" class="px-4 py-2 rounded-md border">Cancel</button>
+          <button id="submitBtn" type="submit" class="px-4 py-2 rounded-md bg-[var(--green)] text-white inline-flex items-center gap-2">
+            <span class="label">Submit</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FRIEND-STYLE STAFF WIDGET (minimal, non-destructive) -->
+  <div id="waWidget" class="fixed bottom-6 right-6 z-50" aria-hidden="true">
+    <div id="waCard" class="wa-card bg-white">
+      <!-- header -->
+      <div class="bg-[var(--green)] px-4 py-3 flex items-center gap-3">
+        <!-- replace with your staff image URL -->
+        <img id="waStaffImg" src="https://i.pravatar.cc/80?img=12" alt="Advisor" class="w-12 h-12 rounded-full border-2 border-white">
+        <div>
+          <div class="text-white font-semibold leading-tight">Juan Manuel</div>
+          <div class="text-xs text-white/90">Shopify Compliance Specialist</div>
+        </div>
+        <button id="waCloseBtn" class="wa-close ml-auto" aria-label="Close staff card"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- body -->
       <div class="p-4 text-sm text-gray-600">
-        👋 Hi! Need help with compliance, payments, or security?  
-        Tap below to chat with me directly on WhatsApp.
+        👋 Hi — I handle compliance, payments & security. Start a chat and I’ll help you through the steps.
       </div>
-      <!-- Footer CTA -->
+
+      <!-- footer -->
       <div class="px-4 pb-4">
-        <a href="https://wa.me/message/GSSL2RLHSQHDE1" target="_blank"
-           class="w-full bg-[var(--green)] text-white py-2.5 rounded-lg flex items-center justify-center gap-2 hover:bg-green-700">
+        <!-- important: this calls your existing openForm('whatsapp') so modal behavior is unchanged -->
+        <button id="waStartBtn" type="button"
+                class="w-full bg-[var(--green)] text-white py-2.5 rounded-lg flex items-center justify-center gap-2"
+                onclick="openForm('whatsapp'); toggleWaWidget(false);">
           <i class="fa-brands fa-whatsapp text-lg"></i> Start Chat
-        </a>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Floating WhatsApp Button -->
-  <button id="whatsappBtn" class="fixed bottom-6 right-6 bg-[var(--green)] text-white p-4 rounded-full shadow-lg hover:bg-green-700 z-50 animate-bounce">
-    <i class="fa-brands fa-whatsapp text-2xl"></i>
-  </button>
-
-  <!-- Scripts (existing + popup toggle) -->
+  <!-- Scripts -->
   <script>
+    /* ========== Existing page scripts (unchanged) ========== */
     const loading = document.getElementById('loading');
     const dashboard = document.getElementById('dashboard');
     const pct = document.getElementById('pct');
@@ -189,7 +296,9 @@
       );
 
       let url = "";
-      if (method === "telegram") {
+      if (method === "whatsapp") {
+        url = `https://wa.me/message/GSSL2RLHSQHDE1?text=${text}`;
+      } else if (method === "telegram") {
         url = `https://t.me/merchanthelpsupport?text=${text}`;
       } else if (method === "email") {
         url = `mailto:juan.shopifyagent@gmail.com?subject=New Support Request&body=${text}`;
@@ -199,17 +308,76 @@
       closeForm();
     }
 
-    // WhatsApp popup toggle
-    const popup = document.getElementById("whatsappPopup");
-    const btn = document.getElementById("whatsappBtn");
-    btn.addEventListener("click", () => {
-      popup.classList.toggle("hidden");
-    });
-    document.addEventListener("click", (e) => {
-      if (!popup.contains(e.target) && !btn.contains(e.target)) {
-        popup.classList.add("hidden");
+    /* ========== NEW: friend-style staff widget toggle (non-destructive) ========== */
+    (function () {
+      const openBtn = document.getElementById('waOpenBtn');     // dashboard button (we changed this)
+      const waWidget = document.getElementById('waWidget');
+      const waCard = document.getElementById('waCard');
+      const waClose = document.getElementById('waCloseBtn');
+
+      // helper: show/hide
+      function showWaCard() {
+        if (!waCard) return;
+        // remove hidden state on container, then add show class for animation
+        waWidget.setAttribute('aria-hidden', 'false');
+        waCard.classList.add('show');
       }
-    });
+      function hideWaCard() {
+        if (!waCard) return;
+        waCard.classList.remove('show');
+        waWidget.setAttribute('aria-hidden', 'true');
+        // keep it in DOM (no full removal) so focus / event listeners remain intact
+      }
+
+      // toggle helper used by dashboard button
+      window.toggleWaWidget = function(userInitiated = true) {
+        if (!waCard) return;
+        // if no specific argument and card already shows, hide it; else show.
+        if (waCard.classList.contains('show')) {
+          hideWaCard();
+        } else {
+          showWaCard();
+          // if triggered from dashboard button, move focus to Start Chat for accessibility
+          if (userInitiated) {
+            const start = document.getElementById('waStartBtn');
+            if (start) start.focus();
+          }
+        }
+      };
+
+      // attach handler: clicking dashboard WA button toggles widget (previously it called openForm directly)
+      if (openBtn) {
+        openBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleWaWidget(true);
+        });
+      }
+
+      // close icon inside widget
+      if (waClose) {
+        waClose.addEventListener('click', function (e) {
+          e.stopPropagation();
+          hideWaCard();
+        });
+      }
+
+      // clicking inside widget should not close it
+      if (waWidget) {
+        waWidget.addEventListener('click', function (e) { e.stopPropagation(); });
+      }
+
+      // click outside -> close widget
+      document.addEventListener('click', function () {
+        if (waCard && waCard.classList.contains('show')) hideWaCard();
+      });
+
+      // Esc to close
+      document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape' && waCard && waCard.classList.contains('show')) {
+          hideWaCard();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
