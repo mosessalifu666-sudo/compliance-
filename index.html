@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Shopify Compliance — Advisor Dashboard</title>
+<title>Shopify Compliance & Growth — Advisor Dashboard</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
@@ -22,7 +22,7 @@ body{background:var(--bg);color:#0f172a}
 .animate-fade-in { animation: fadeIn .18s ease-out; }
 .hidden { display: none !important; }
 
-/* Mobile tweaks for better preview */
+/* Mobile tweaks */
 @media(max-width:640px){
   .card { padding: 1rem !important; }
   #dashboard { padding: 1rem !important; }
@@ -36,7 +36,7 @@ body{background:var(--bg);color:#0f172a}
 <section id="loading" class="min-h-screen flex items-center justify-center">
   <div class="max-w-xl w-full p-6 text-center">
     <img src="https://cdn.shopify.com/assets/images/logos/shopify-bag.png" class="mx-auto h-14 mb-4" alt="Shopify"/>
-    <h1 class="text-2xl font-semibold">Connecting you with a Compliance Specialist</h1>
+    <h1 class="text-2xl font-semibold">Connecting you with a Specialist</h1>
     <p class="text-sm text-[var(--muted)] mt-2">Preparing your secure session — this takes a moment.</p>
     <div class="relative mx-auto mt-8 w-28 h-28">
       <div class="w-28 h-28 rounded-full border-4 border-gray-200"></div>
@@ -47,13 +47,13 @@ body{background:var(--bg);color:#0f172a}
 </section>
 
 <!-- Dashboard -->
-<main id="dashboard" class="hidden max-w-6xl mx-auto py-10 px-6">
-  <header class="mb-6 flex items-center justify-between">
+<main id="dashboard" class="hidden max-w-6xl mx-auto py-10 px-6 space-y-8">
+  <header class="flex items-center justify-between mb-8">
     <div class="flex items-center gap-4">
       <img src="https://cdn.shopify.com/assets/images/logos/shopify-bag.png" alt="Shopify" class="h-9"/>
       <div>
-        <div class="text-lg font-semibold">Compliance Advisor</div>
-        <div class="text-sm text-[var(--muted)]">Secure case handling & merchant support</div>
+        <div class="text-lg font-semibold">Shopify Advisor</div>
+        <div class="text-sm text-[var(--muted)]">Helping merchants grow safely & profitably</div>
       </div>
     </div>
     <div class="text-sm inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-700"> 
@@ -63,17 +63,17 @@ body{background:var(--bg);color:#0f172a}
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Left Column -->
-    <aside class="card p-6">
+    <aside class="card p-6 space-y-6">
       <div class="flex items-center gap-4">
         <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--green)] text-white flex items-center justify-center text-xl font-semibold">JM</div>
         <div>
           <div class="text-lg font-semibold">Juan Manuel</div>
-          <div class="text-sm text-[var(--muted)]">Shopify Compliance Specialist</div>
+          <div class="text-sm text-[var(--muted)]">Shopify Compliance & Growth Specialist</div>
         </div>
       </div>
-      <p class="text-sm text-[var(--muted)] mt-4">Resolving compliance, payments and security issues. Please share case details to proceed.</p>
+      <p class="text-sm text-[var(--muted)] mt-4">I help you resolve compliance issues and grow your Shopify store through marketing, SEO, and performance optimization. Share your case to proceed.</p>
 
-      <div class="mt-6 grid gap-3">
+      <div class="grid gap-3">
         <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
           <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
         </button>
@@ -85,15 +85,50 @@ body{background:var(--bg);color:#0f172a}
         </button>
       </div>
 
-      <div class="mt-6">
+      <div class="space-y-2">
         <h4 class="text-sm font-medium text-gray-700">Advisor stats</h4>
-        <div class="mt-2 text-sm text-[var(--muted)]">Expert • 5+ years • Rating 4.9/5</div>
+        <div class="text-sm text-[var(--muted)]">Expert • 5+ years • 50+ stores helped • Rating 4.9/5</div>
       </div>
     </aside>
 
     <!-- Right Column -->
     <section class="lg:col-span-2 space-y-6">
-      <div class="card p-6">
+      <!-- Services Section -->
+      <div class="card p-6 space-y-4">
+        <h3 class="font-semibold text-lg mb-2">Services & Benefits</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-shield-halved text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">Compliance & Security</div>
+              <div class="text-sm text-[var(--muted)]">Protect your store and payments with expert guidance.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-bullhorn text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">Marketing & Sales Growth</div>
+              <div class="text-sm text-[var(--muted)]">Boost your revenue with tailored campaigns and strategies.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-chart-line text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">SEO & Store Visibility</div>
+              <div class="text-sm text-[var(--muted)]">Improve search ranking and attract more customers.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-gear text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">Shopify Best Practices</div>
+              <div class="text-sm text-[var(--muted)]">Optimize your store operations and performance for success.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Ticket & Case Progress Section -->
+      <div class="card p-6 space-y-4">
         <div class="flex items-start justify-between">
           <div>
             <div class="text-sm text-[var(--muted)]">Ticket</div>
@@ -106,7 +141,7 @@ body{background:var(--bg);color:#0f172a}
         </div>
       </div>
 
-      <div class="card p-6">
+      <div class="card p-6 space-y-4">
         <div class="flex items-center justify-between mb-3">
           <h3 class="font-semibold">Case Progress</h3>
           <div id="progressLabel" class="text-sm text-[var(--muted)]">Step 2 of 4</div>
@@ -187,12 +222,12 @@ body{background:var(--bg);color:#0f172a}
       <img id="waStaffImg" src="https://i.pravatar.cc/80?img=12" alt="Advisor" class="w-10 h-10 rounded-full border-2 border-white">
       <div>
         <div class="font-semibold">Juan Manuel</div>
-        <div class="text-xs opacity-90">Shopify Compliance Specialist</div>
+        <div class="text-xs opacity-90">Shopify Compliance & Growth Specialist</div>
       </div>
       <button id="waCloseBtn" class="ml-auto text-white/90 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="p-4 text-sm text-gray-600">
-      👋 Hi — I handle compliance, payments & security. Start a chat and I’ll help you through the steps.
+      👋 Hi — I help you with compliance, payments, SEO, marketing & sales. Start a chat and I’ll guide you through.
     </div>
     <div class="px-4 pb-4">
       <a href="https://wa.me/2349135251130" target="_blank" class="w-full block bg-[var(--green)] text-white py-2.5 rounded-lg text-center mb-2"><i class="fa-brands fa-whatsapp"></i> Start Chat</a>
