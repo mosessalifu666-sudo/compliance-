@@ -19,26 +19,11 @@
     .step-line.active{background:var(--green)}
     .card{background:white;border:1px solid var(--border);border-radius:12px}
 
-    /* widget animation + basic "card" styling (kept minimal so it won't conflict) */
-    .wa-card {
-      width: 20rem; /* same as w-80 */
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(15,23,42,0.12);
-      border: 1px solid rgba(229,231,235,1);
-      transform-origin: 100% 100%;
-      transition: opacity .16s ease, transform .18s cubic-bezier(.2,.9,.2,1);
-      opacity: 0;
-      transform: translateY(8px) scale(.98);
-      pointer-events: none;
-    }
-    .wa-card.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-    /* small close button style inside header to match look */
-    .wa-close { background: transparent; border: none; color: rgba(255,255,255,.9); font-size: 1rem; cursor: pointer; }
+    /* small entrance animation */
+    @keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+    .animate-fade-in { animation: fadeIn .18s ease-out; }
+    /* simple modal layout helper (keeps original styles minimal) */
+    .hidden { display: none !important; }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -86,8 +71,8 @@
         <p class="text-sm text-[var(--muted)] mt-4">Resolving compliance, payments and security issues. Please share case details to proceed.</p>
 
         <div class="mt-6 grid gap-3">
-          <!-- CHANGED: the WhatsApp button now toggles the friend-style widget instead of calling openForm() directly -->
-          <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring" aria-controls="waWidget" aria-expanded="false">
+          <!-- dashboard WhatsApp button now toggles staff popup (calls openForm when user clicks Start Chat in widget) -->
+          <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
             <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
           </button>
 
@@ -141,13 +126,13 @@
 
   <!-- Modal -->
   <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 modal">
-    <div class="bg-white w-full max-w-2xl rounded-lg p-6 card">
+    <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in">
       <div class="flex items-start justify-between">
         <div>
           <h3 class="text-lg font-semibold">Contact Advisor</h3>
           <div class="text-sm text-[var(--muted)]">Ticket <span id="ticketRef" class="font-medium">#SA02-2097</span></div>
         </div>
-        <button aria-label="Close" onclick="closeForm()" class="text-gray-500 hover:text-gray-800"><i class="fa-solid fa-xmark"></i></button>
+        <button aria-label="Close" id="modalCloseBtn" class="text-gray-500 hover:text-gray-800"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <form id="contactForm" class="mt-4 space-y-4" onsubmit="handleSubmit(event)">
@@ -160,7 +145,8 @@
           </div>
           <div>
             <label class="block text-sm text-gray-700">Store URL</label>
-            <input id="storeInput" type="url" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="https://yourstore.myshopify.com" />
+            <!-- optional now -->
+            <input id="storeInput" type="url" class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="https://yourstore.myshopify.com" />
           </div>
           <div>
             <label class="block text-sm text-gray-700">Email address</label>
@@ -189,7 +175,7 @@
         </div>
 
         <div class="flex items-center justify-end gap-3">
-          <button type="button" onclick="closeForm()" class="px-4 py-2 rounded-md border">Cancel</button>
+          <button type="button" id="cancelBtn" class="px-4 py-2 rounded-md border">Cancel</button>
           <button id="submitBtn" type="submit" class="px-4 py-2 rounded-md bg-[var(--green)] text-white inline-flex items-center gap-2">
             <span class="label">Submit</span>
           </button>
@@ -198,40 +184,44 @@
     </div>
   </div>
 
-  <!-- FRIEND-STYLE STAFF WIDGET (minimal, non-destructive) -->
-  <div id="waWidget" class="fixed bottom-6 right-6 z-50" aria-hidden="true">
-    <div id="waCard" class="wa-card bg-white">
-      <!-- header -->
-      <div class="bg-[var(--green)] px-4 py-3 flex items-center gap-3">
-        <!-- replace with your staff image URL -->
-        <img id="waStaffImg" src="https://i.pravatar.cc/80?img=12" alt="Advisor" class="w-12 h-12 rounded-full border-2 border-white">
+  <!-- FRIEND-STYLE STAFF WIDGET (floating) -->
+  <div id="whatsappPopup" class="fixed bottom-20 right-6 w-80 hidden z-50" aria-hidden="true">
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden animate-fade-in">
+      <div class="bg-[var(--green)] text-white px-4 py-3 flex items-center gap-3">
+        <img id="waStaffImg" src="https://i.pravatar.cc/80?img=12" alt="Advisor" class="w-10 h-10 rounded-full border-2 border-white">
         <div>
-          <div class="text-white font-semibold leading-tight">Juan Manuel</div>
-          <div class="text-xs text-white/90">Shopify Compliance Specialist</div>
+          <div class="font-semibold">Juan Manuel</div>
+          <div class="text-xs opacity-90">Shopify Compliance Specialist</div>
         </div>
-        <button id="waCloseBtn" class="wa-close ml-auto" aria-label="Close staff card"><i class="fa-solid fa-xmark"></i></button>
+        <button id="waCloseBtn" class="ml-auto text-white/90 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <!-- body -->
       <div class="p-4 text-sm text-gray-600">
         👋 Hi — I handle compliance, payments & security. Start a chat and I’ll help you through the steps.
       </div>
 
-      <!-- footer -->
       <div class="px-4 pb-4">
-        <!-- important: this calls your existing openForm('whatsapp') so modal behavior is unchanged -->
-        <button id="waStartBtn" type="button"
-                class="w-full bg-[var(--green)] text-white py-2.5 rounded-lg flex items-center justify-center gap-2"
-                onclick="openForm('whatsapp'); toggleWaWidget(false);">
+        <button id="waStartBtn" class="w-full bg-[var(--green)] text-white py-2.5 rounded-lg flex items-center justify-center gap-2 mb-2">
           <i class="fa-brands fa-whatsapp text-lg"></i> Start Chat
+        </button>
+        <button id="waTelegramBtn" class="w-full bg-[var(--teal)] text-white py-2.5 rounded-lg flex items-center justify-center gap-2 mb-2">
+          <i class="fa-brands fa-telegram text-lg"></i> Message (Telegram)
+        </button>
+        <button id="waEmailBtn" class="w-full bg-gray-800 text-white py-2.5 rounded-lg flex items-center justify-center gap-2">
+          <i class="fa-solid fa-envelope text-lg"></i> Send Email
         </button>
       </div>
     </div>
   </div>
 
+  <!-- Floating trigger button -->
+  <button id="waTriggerBtn" class="fixed bottom-6 right-6 z-50 rounded-full p-4 bg-[var(--green)] text-white shadow-lg hover:bg-green-700 focus-ring">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+  </button>
+
   <!-- Scripts -->
   <script>
-    /* ========== Existing page scripts (unchanged) ========== */
+    /* ---------- Existing loading + stepper (unchanged) ---------- */
     const loading = document.getElementById('loading');
     const dashboard = document.getElementById('dashboard');
     const pct = document.getElementById('pct');
@@ -243,7 +233,8 @@
         clearInterval(t);
         loading.classList.add('hidden');
         dashboard.classList.remove('hidden');
-        initStepper(2);
+        // preserve stepper init if present
+        if (typeof initStepper === 'function') initStepper(2);
       }
     },110);
 
@@ -251,133 +242,175 @@
       const total = 4;
       for(let i=1;i<=total;i++){
         const dot = document.getElementById('dot-'+i);
-        if(i<=current){ dot.classList.add('active'); }
-        else{ dot.classList.remove('active'); }
+        if(dot) {
+          if(i<=current){ dot.classList.add('active'); }
+          else{ dot.classList.remove('active'); }
+        }
         const ln = document.getElementById('line-'+i);
         if(ln){ if(i<current){ ln.classList.add('active'); } else{ ln.classList.remove('active'); } }
       }
-      document.getElementById('progressLabel').textContent = `Step ${current} of ${total}`;
+      const lbl = document.getElementById('progressLabel');
+      if (lbl) lbl.textContent = `Step ${current} of ${total}`;
     }
 
+    /* ---------- Modal & form logic ---------- */
     const modal = document.getElementById('modal');
+    const contactForm = document.getElementById('contactForm');
     const methodField = document.getElementById('methodField');
-    const ticketRef = document.getElementById('ticketRef');
     const ticketInput = document.getElementById('ticketInput');
+    const waPopup = document.getElementById('whatsappPopup');
 
-    function openForm(method){
+    function openForm(method) {
+      // set method and open modal
       methodField.value = method;
-      ticketRef.textContent = ticketInput.value; 
-      document.getElementById('contactForm').classList.remove('hidden');
-      document.querySelector('#submitBtn .label').textContent = 'Submit';
-      modal.classList.remove('hidden'); modal.classList.add('flex');
-    }
-    function closeForm(){
-      modal.classList.add('hidden'); modal.classList.remove('flex');
-      document.getElementById('contactForm').reset();
+      // close staff popup if open
+      if (waPopup) waPopup.classList.add('hidden');
+      // show modal
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        // focus first field
+        const nm = document.getElementById('nameInput');
+        if (nm) nm.focus();
+      }
     }
 
-    function handleSubmit(e){
+    function closeForm() {
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+      // reset form values
+      if (contactForm) contactForm.reset();
+    }
+
+    // close modal on outside click or Escape
+    const modalCloseBtn = document.getElementById('modalCloseBtn') || document.getElementById('cancelBtn');
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeForm);
+    document.addEventListener('click', function(e){
+      if (modal && !modal.classList.contains('hidden')) {
+        const wrapper = modal.querySelector('.card, .animate-fade-in') || modal.firstElementChild;
+        if (wrapper && !wrapper.contains(e.target) && !e.target.matches('#waTriggerBtn, #waTriggerBtn *')) {
+          closeForm();
+        }
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        // close modal and staff popup if open
+        if (modal && !modal.classList.contains('hidden')) closeForm();
+        if (waPopup && !waPopup.classList.contains('hidden')) waPopup.classList.add('hidden');
+      }
+    });
+
+    /* ---------- Submission handler (fixed) ---------- */
+    function handleSubmit(e) {
       e.preventDefault();
+      const method = (methodField && methodField.value) ? methodField.value : 'whatsapp';
+      const storeRaw = (document.getElementById('storeInput') || {}).value || '';
+      const store = storeRaw.trim();
+      const email = (document.getElementById('emailInput') || {}).value || '';
+      const issue = (document.getElementById('issueInput') || {}).value || '';
+      const name = (document.getElementById('nameInput') || {}).value || '';
+      const messageRaw = (document.getElementById('messageInput') || {}).value || '';
+      const message = messageRaw.trim() || "Hi, I need help with my Shopify store";
 
-      const method = document.getElementById('methodField').value;
-      const store = document.getElementById('storeInput').value;
-      const email = document.getElementById('emailInput').value;
-      const issue = document.getElementById('issueInput').value;
-      const name = document.getElementById('nameInput').value;
-      const message = document.getElementById('messageInput').value;
-
-      const text = encodeURIComponent(
+      const body = 
         `New Support Request\n\n` +
         `Name: ${name}\n` +
         `Email: ${email}\n` +
-        `Store: ${store}\n` +
+        `Store: ${store || "(not provided)"}\n` +
         `Issue: ${issue}\n\n` +
-        `${message}`
-      );
+        `${message}`;
 
-      let url = "";
-      if (method === "whatsapp") {
-        url = `https://wa.me/message/GSSL2RLHSQHDE1?text=${text}`;
-      } else if (method === "telegram") {
-        url = `https://t.me/merchanthelpsupport?text=${text}`;
-      } else if (method === "email") {
-        url = `mailto:juan.shopifyagent@gmail.com?subject=New Support Request&body=${text}`;
+      const encoded = encodeURIComponent(body);
+
+      // === Platform URLs ===
+      // Replace YOUR_WHATSAPP_NUMBER with your number (digits only, country code included)
+      const WHATSAPP_NUMBER = 'YOUR_WHATSAPP_NUMBER';
+      const SUPPORT_EMAIL = 'YOUR_EMAIL@example.com';
+      const TELEGRAM_SHARE_URL = 'https://shopify.com'; // optional URL used in Telegram share
+
+      let url = '';
+      if (method === 'whatsapp') {
+        if (!WHATSAPP_NUMBER || WHATSAPP_NUMBER === 'YOUR_WHATSAPP_NUMBER') {
+          // fallback: open wa.me without number (not recommended) — we'll still try to open default
+          url = `https://wa.me/?text=${encoded}`;
+        } else {
+          url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+        }
+      } else if (method === 'telegram') {
+        // t.me/share/url supports text param
+        url = `https://t.me/share/url?url=${encodeURIComponent(TELEGRAM_SHARE_URL)}&text=${encoded}`;
+      } else if (method === 'email') {
+        // mailto: to SUPPORT_EMAIL (replace placeholder)
+        url = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('New Support Request')}&body=${encoded}`;
       }
 
-      window.open(url, "_blank");
+      // open in new tab/window
+      if (url) {
+        window.open(url, '_blank');
+      } else {
+        console.warn('No destination URL generated for method:', method);
+      }
+
+      // close the modal and reset
       closeForm();
     }
 
-    /* ========== NEW: friend-style staff widget toggle (non-destructive) ========== */
-    (function () {
-      const openBtn = document.getElementById('waOpenBtn');     // dashboard button (we changed this)
-      const waWidget = document.getElementById('waWidget');
-      const waCard = document.getElementById('waCard');
-      const waClose = document.getElementById('waCloseBtn');
+    // connect event listener if not using inline onsubmit
+    if (contactForm) {
+      contactForm.addEventListener('submit', handleSubmit);
+    }
 
-      // helper: show/hide
-      function showWaCard() {
-        if (!waCard) return;
-        // remove hidden state on container, then add show class for animation
-        waWidget.setAttribute('aria-hidden', 'false');
-        waCard.classList.add('show');
-      }
-      function hideWaCard() {
-        if (!waCard) return;
-        waCard.classList.remove('show');
-        waWidget.setAttribute('aria-hidden', 'true');
-        // keep it in DOM (no full removal) so focus / event listeners remain intact
-      }
+    /* ---------- Staff widget toggle & buttons ---------- */
+    const waTriggerBtn = document.getElementById('waTriggerBtn');
+    const waOpenBtn = document.getElementById('waOpenBtn');
+    const waStartBtn = document.getElementById('waStartBtn');
+    const waTelegramBtn = document.getElementById('waTelegramBtn');
+    const waEmailBtn = document.getElementById('waEmailBtn');
+    const waCloseBtn = document.getElementById('waCloseBtn');
 
-      // toggle helper used by dashboard button
-      window.toggleWaWidget = function(userInitiated = true) {
-        if (!waCard) return;
-        // if no specific argument and card already shows, hide it; else show.
-        if (waCard.classList.contains('show')) {
-          hideWaCard();
-        } else {
-          showWaCard();
-          // if triggered from dashboard button, move focus to Start Chat for accessibility
-          if (userInitiated) {
-            const start = document.getElementById('waStartBtn');
-            if (start) start.focus();
-          }
-        }
-      };
+    function toggleWaPopup(show) {
+      if (!waPopup) return;
+      if (typeof show === 'undefined') waPopup.classList.toggle('hidden');
+      else if (show) waPopup.classList.remove('hidden');
+      else waPopup.classList.add('hidden');
+    }
 
-      // attach handler: clicking dashboard WA button toggles widget (previously it called openForm directly)
-      if (openBtn) {
-        openBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          toggleWaWidget(true);
-        });
-      }
-
-      // close icon inside widget
-      if (waClose) {
-        waClose.addEventListener('click', function (e) {
-          e.stopPropagation();
-          hideWaCard();
-        });
-      }
-
-      // clicking inside widget should not close it
-      if (waWidget) {
-        waWidget.addEventListener('click', function (e) { e.stopPropagation(); });
-      }
-
-      // click outside -> close widget
-      document.addEventListener('click', function () {
-        if (waCard && waCard.classList.contains('show')) hideWaCard();
+    if (waTriggerBtn) {
+      waTriggerBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        toggleWaPopup();
       });
-
-      // Esc to close
-      document.addEventListener('keydown', function (ev) {
-        if (ev.key === 'Escape' && waCard && waCard.classList.contains('show')) {
-          hideWaCard();
-        }
+    }
+    if (waOpenBtn) {
+      // dashboard button toggles popup instead of directly making modal (so user sees staff card)
+      waOpenBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        toggleWaPopup(true);
       });
-    })();
+    }
+    if (waCloseBtn) {
+      waCloseBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        toggleWaPopup(false);
+      });
+    }
+    // staff card buttons: open modal for each method and hide the staff card
+    if (waStartBtn) waStartBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleWaPopup(false); openForm('whatsapp'); });
+    if (waTelegramBtn) waTelegramBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleWaPopup(false); openForm('telegram'); });
+    if (waEmailBtn) waEmailBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleWaPopup(false); openForm('email'); });
+
+    // clicking outside staff popup closes it
+    document.addEventListener('click', function(e){
+      if (waPopup && !waPopup.classList.contains('hidden')) {
+        if (!waPopup.contains(e.target) && !waTriggerBtn.contains(e.target)) {
+          toggleWaPopup(false);
+        }
+      }
+    });
+
   </script>
 </body>
 </html>
