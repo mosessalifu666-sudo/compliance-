@@ -21,6 +21,13 @@ body{background:var(--bg);color:#0f172a}
 @keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 .animate-fade-in { animation: fadeIn .18s ease-out; }
 .hidden { display: none !important; }
+
+/* Mobile tweaks for better preview */
+@media(max-width:640px){
+  .card { padding: 1rem !important; }
+  #dashboard { padding: 1rem !important; }
+  .grid { gap: 1rem !important; }
+}
 </style>
 </head>
 <body class="font-sans antialiased">
@@ -70,7 +77,6 @@ body{background:var(--bg);color:#0f172a}
         <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
           <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
         </button>
-
         <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--teal)] text-white py-2.5 rounded-md focus-ring">
           <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
         </button>
@@ -121,7 +127,7 @@ body{background:var(--bg);color:#0f172a}
 
 <!-- Modal Contact Form -->
 <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 px-4">
-  <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in sm:px-6 sm:py-6">
+  <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in">
     <div class="flex items-start justify-between">
       <div>
         <h3 class="text-lg font-semibold">Contact Advisor</h3>
@@ -131,7 +137,6 @@ body{background:var(--bg);color:#0f172a}
     </div>
     <form id="contactForm" class="mt-4 space-y-4" onsubmit="handleSubmit(event)">
       <input type="hidden" id="methodField" />
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="block text-sm text-gray-700">Ticket ID</label>
@@ -157,7 +162,6 @@ body{background:var(--bg);color:#0f172a}
           </select>
         </div>
       </div>
-
       <div>
         <label class="block text-sm text-gray-700">Your name</label>
         <input id="nameInput" type="text" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" />
@@ -166,7 +170,6 @@ body{background:var(--bg);color:#0f172a}
         <label class="block text-sm text-gray-700">Message</label>
         <textarea id="messageInput" rows="4" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="Summary of the issue..."></textarea>
       </div>
-
       <div class="flex items-center justify-end gap-3">
         <button type="button" id="cancelBtn" class="px-4 py-2 rounded-md border">Cancel</button>
         <button id="submitBtn" type="submit" class="px-4 py-2 rounded-md bg-[var(--green)] text-white inline-flex items-center gap-2">
@@ -246,17 +249,24 @@ function closeForm(){
 function handleSubmit(e){
   e.preventDefault();
   const method = methodField.value;
-  const ticket = document.getElementById('ticketInput').value;  // Added ticket
+  const ticket = document.getElementById('ticketInput').value;
   const store = document.getElementById('storeInput').value;
   const email = document.getElementById('emailInput').value;
   const issue = document.getElementById('issueInput').value;
   const name = document.getElementById('nameInput').value;
   const message = document.getElementById('messageInput').value;
   let url='';
-  const body = encodeURIComponent(Ticket: ${ticket}\nName: ${name}\nEmail: ${email}\nStore: ${store}\nIssue: ${issue}\nMessage: ${message});
-  if(method==='whatsapp') url=https://wa.me/2349135251130?text=${body};
-  else if(method==='telegram') url=https://t.me/yourtelegramusername;
-  else if(method==='email') url=mailto:your-email@gmail.com?subject=Support Request&body=${body};
+  const body = encodeURIComponent(
+    'Ticket: ' + ticket + '\n' +
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    'Store: ' + store + '\n' +
+    'Issue: ' + issue + '\n' +
+    'Message: ' + message
+  );
+  if(method==='whatsapp') url='https://wa.me/2349135251130?text=' + body;
+  else if(method==='telegram') url='https://t.me/yourtelegramusername';
+  else if(method==='email') url='mailto:your-email@gmail.com?subject=Support Request&body=' + body;
   window.open(url,'_blank');
 }
 </script>
