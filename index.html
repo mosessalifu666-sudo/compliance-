@@ -12,15 +12,41 @@
 }
 body{background:var(--bg);color:#0f172a}
 .focus-ring:focus{outline:none;box-shadow:0 0 0 4px rgba(0,128,96,.12)}
-.step{display:flex;align-items:center;gap:.75rem}
-.step-dot{width:36px;height:36px;border-radius:9999px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:#fff}
-.step-dot.active{background:var(--green);color:white;border-color:var(--green)}
-.step-line{height:2px;background:var(--border);flex:1}
-.step-line.active{background:var(--green)}
+.step{display:flex;align-items:center;gap:.75rem;position:relative}
+.step-dot{width:36px;height:36px;border-radius:9999px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:#fff;transition: all 0.3s ease;}
+.step-dot.active{background:var(--green);color:white;border-color:var(--green);}
+.step-line{height:4px;background:var(--border);flex:1;transition: all 0.3s ease;}
+.step-line.active{background:var(--green);}
 .card{background:white;border:1px solid var(--border);border-radius:12px}
 @keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 .animate-fade-in { animation: fadeIn .18s ease-out; }
 .hidden { display: none !important; }
+
+/* Sliding text ticker */
+.ticker-wrapper{
+  overflow:hidden;
+  position:relative;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:0.5rem 0;
+  background:white;
+  border-radius:8px;
+}
+.ticker{
+  display:inline-block;
+  white-space:nowrap;
+  animation: slide 20s linear infinite;
+  font-weight:600;
+  color:var(--green);
+  font-size:0.95rem;
+}
+.ticker span{
+  margin-right:4rem;
+}
+@keyframes slide{
+  0%{transform:translateX(100%);}
+  100%{transform:translateX(-100%);}
+}
 
 /* Mobile tweaks */
 @media(max-width:640px){
@@ -127,7 +153,8 @@ body{background:var(--bg);color:#0f172a}
           </div>
         </div>
       </div>
-      <!-- Ticket & Case Progress Section -->
+
+      <!-- Ticket Section -->
       <div class="card p-6 space-y-4">
         <div class="flex items-start justify-between">
           <div>
@@ -141,26 +168,36 @@ body{background:var(--bg);color:#0f172a}
         </div>
       </div>
 
+      <!-- Case Progress + Ticker -->
       <div class="card p-6 space-y-4">
         <div class="flex items-center justify-between mb-3">
           <h3 class="font-semibold">Case Progress</h3>
           <div id="progressLabel" class="text-sm text-[var(--muted)]">Step 2 of 4</div>
         </div>
         <div class="flex items-center gap-4">
-          <div class="step"><div id="dot-1" class="step-dot">1</div><div class="text-sm ml-2">Case Created</div></div>
-          <div id="line-1" class="step-line"></div>
-          <div class="step"><div id="dot-2" class="step-dot">2</div><div class="text-sm ml-2">Advisor Assigned</div></div>
+          <div class="step"><div id="dot-1" class="step-dot active">1</div><div class="text-sm ml-2">Case Created</div></div>
+          <div id="line-1" class="step-line active"></div>
+          <div class="step"><div id="dot-2" class="step-dot active">2</div><div class="text-sm ml-2">Advisor Assigned</div></div>
           <div id="line-2" class="step-line"></div>
           <div class="step"><div id="dot-3" class="step-dot">3</div><div class="text-sm ml-2">Pending Review</div></div>
           <div id="line-3" class="step-line"></div>
           <div class="step"><div id="dot-4" class="step-dot">4</div><div class="text-sm ml-2">Active</div></div>
         </div>
+
+        <div class="ticker-wrapper mt-6">
+          <div class="ticker">
+            <span>⚡ New Shopify compliance updates available</span>
+            <span>📈 Boost your store sales with expert tips</span>
+            <span>🔒 Secure your payment gateway now</span>
+            <span>🚀 Optimize your store SEO for higher traffic</span>
+            <span>💡 Learn the latest Shopify best practices</span>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 </main>
-
-<!-- Modal Contact Form -->
+  <!-- Modal Contact Form -->
 <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 px-4">
   <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in">
     <div class="flex items-start justify-between">
@@ -305,6 +342,5 @@ function handleSubmit(e){
   window.open(url,'_blank');
 }
 </script>
-
 </body>
 </html>
