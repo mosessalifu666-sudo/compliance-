@@ -140,15 +140,19 @@ body{background:var(--bg);color:#0f172a}
   </header>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<!-- LEFT column -->
-<aside class="card p-6 flex flex-col">
-  <div class="flex items-center gap-4 mb-4">
-    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--green)] text-white flex items-center justify-center text-xl font-semibold">JM</div>
+  <!-- Left Column -->
+<aside class="card p-6 space-y-6">
+  <div class="flex items-center gap-4">
+    <!-- Profile Image -->
+    <div class="w-16 h-16 rounded-full overflow-hidden">
+      <img src="https://i.pinimg.com/736x/2f/53/58/2f535867ec2ea063d07e3c4148d18cf8.jpg" alt="Juan Manuel" class="w-full h-full object-cover">
+    </div>
     <div>
       <div class="text-lg font-semibold">Juan Manuel</div>
       <div class="text-sm text-[var(--muted)]">Shopify Compliance & Growth Specialist</div>
     </div>
   </div>
+</aside>
 
   <p class="text-sm text-[var(--muted)] mb-4">
     I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started
@@ -483,6 +487,7 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
 
 
