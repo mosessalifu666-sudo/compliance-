@@ -63,6 +63,50 @@ body{background:var(--bg);color:#0f172a}
 }
 @keyframes ticker { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
 
+/* ✅ Desktop refinements */
+@media(min-width:1024px){ 
+  #dashboard{
+    padding:2.5rem 3rem !important; /* more breathing room */
+    max-width: 1200px; /* slightly tighter container */
+  }
+
+  .card{
+    padding:2rem !important;
+    transition: all .2s ease-in-out;
+  }
+
+  .card:hover{
+    box-shadow:0 6px 20px rgba(0,0,0,0.06);
+    transform:translateY(-2px);
+  }
+
+  .grid{
+    gap:2rem !important; /* more space between blocks */
+  }
+
+  h3, h4{
+    letter-spacing:-0.01em;
+  }
+
+  p, li{
+    max-width:65ch; /* readable text width */
+  }
+
+  /* Services grid -> 4 cols on desktop */
+  .services-grid{
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+
+  /* Success stories -> 3 per row on desktop */
+  .stories-grid{
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+
+  /* Case Study cards equal height */
+  section.max-w-5xl > div{
+    height:100%;
+  }
+}
 </style>
 </head>
 <body class="font-sans antialiased">
@@ -96,8 +140,7 @@ body{background:var(--bg);color:#0f172a}
   </header>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <!-- LEFT column: aside goes in Part 3 -->
-    <!-- Left Column -->
+    <!-- LEFT column -->
     <aside class="card p-6 space-y-6">
       <div class="flex items-center gap-4">
         <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--green)] text-white flex items-center justify-center text-xl font-semibold">JM</div>
@@ -110,17 +153,12 @@ body{background:var(--bg);color:#0f172a}
       <p class="text-sm text-[var(--muted)] mt-4">I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started</p>
 
       <div class="grid gap-3">
-        <!-- WhatsApp opens the modal with method=whatsapp -->
         <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
           <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
         </button>
-
-        <!-- Telegram button uses the Telegram blue variable -->
         <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--telegram)] text-white py-2.5 rounded-md focus-ring">
           <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
         </button>
-
-        <!-- Email -->
         <button onclick="openForm('email')" class="w-full inline-flex items-center justify-center gap-3 bg-gray-800 text-white py-2.5 rounded-md focus-ring">
           <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
         </button>
@@ -131,12 +169,13 @@ body{background:var(--bg);color:#0f172a}
         <div class="text-sm text-[var(--muted)]">Expert • 5+ years • 50+ stores helped • Rating 4.9/5</div>
       </div>
     </aside>
+
     <!-- Right Column -->
     <section class="lg:col-span-2 space-y-6">
       <!-- Services Section -->
       <div class="card p-6 space-y-4">
         <h3 class="font-semibold text-lg mb-2">Services & Benefits</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 services-grid">
           <div class="flex items-start gap-3">
             <i class="fa-solid fa-shield-halved text-[var(--green)] text-2xl mt-1"></i>
             <div>
@@ -167,7 +206,6 @@ body{background:var(--bg);color:#0f172a}
           </div>
         </div>
       </div>
-
       <!-- Ticket Section -->
       <div class="card p-6 space-y-4">
         <div class="flex items-start justify-between">
@@ -212,10 +250,10 @@ body{background:var(--bg);color:#0f172a}
         </div>
       </div>
 
-        <!-- NEW: Recent Merchant Success Stories -->
+      <!-- Recent Merchant Success Stories -->
       <div class="card p-6 space-y-4">
         <h3 class="font-semibold text-lg mb-2">Recent Merchant Success Stories</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 stories-grid">
           <div class="border rounded-lg overflow-hidden">
             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop" class="w-full h-32 object-cover" alt="conversion">
             <div class="p-3">
@@ -239,33 +277,32 @@ body{background:var(--bg);color:#0f172a}
           </div>
         </div>
       </div>
- <!-- CASE STUDY: Hero images updated per request -->
-  <section class="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-    <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
-      <img src="https://i.pinimg.com/736x/6c/71/e8/6c71e84df436880b442e6598dc4a999e.jpg" alt="Conversion lift chart" class="w-full h-40 sm:h-32 object-cover rounded" />
-      <div>
-        <div class="text-base sm:text-sm font-semibold">+30% Conversion Lift</div>
-        <p class="text-sm sm:text-xs text-gray-600 mt-1">Quick checkout fixes & trust badges boosted conversions by 30% in 2 weeks.</p>
-      </div>
-    </div>
+      <!-- Case Study Section -->
+      <section class="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
+          <img src="https://i.pinimg.com/736x/6c/71/e8/6c71e84df436880b442e6598dc4a999e.jpg" alt="Conversion lift chart" class="w-full h-40 sm:h-32 object-cover rounded" />
+          <div>
+            <div class="text-base sm:text-sm font-semibold">+30% Conversion Lift</div>
+            <p class="text-sm sm:text-xs text-gray-600 mt-1">Quick checkout fixes & trust badges boosted conversions by 30% in 2 weeks.</p>
+          </div>
+        </div>
+        <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
+          <img src="https://i.pinimg.com/736x/e4/8f/df/e48fdf1b74b2471bf537193df06c01ac.jpg" alt="SEO visibility" class="w-full h-40 sm:h-32 object-cover rounded" />
+          <div>
+            <div class="text-base sm:text-sm font-semibold">SEO & Visibility Gains</div>
+            <p class="text-sm sm:text-xs text-gray-600 mt-1">SEO audit + metadata improvements increased organic visits by 45% in 60 days.</p>
+          </div>
+        </div>
+        <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
+          <img src="https://i.pinimg.com/736x/fb/fa/1d/fbfa1dabc7dd0a3ceec42dd23e140a98.jpg" alt="Revenue growth graph" class="w-full h-40 sm:h-32 object-cover rounded" />
+          <div>
+            <div class="text-base sm:text-sm font-semibold">Quarterly Revenue +40%</div>
+            <p class="text-sm sm:text-xs text-gray-600 mt-1">CRO & ad funnel tweaks scaled revenue 40% quarter-over-quarter for a fashion merchant.</p>
+          </div>
+        </div>
+      </section>
 
-    <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
-      <img src="https://i.pinimg.com/736x/e4/8f/df/e48fdf1b74b2471bf537193df06c01ac.jpg" alt="SEO visibility" class="w-full h-40 sm:h-32 object-cover rounded" />
-      <div>
-        <div class="text-base sm:text-sm font-semibold">SEO & Visibility Gains</div>
-        <p class="text-sm sm:text-xs text-gray-600 mt-1">SEO audit + metadata improvements increased organic visits by 45% in 60 days.</p>
-      </div>
-    </div>
-
-    <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
-      <img src="https://i.pinimg.com/736x/fb/fa/1d/fbfa1dabc7dd0a3ceec42dd23e140a98.jpg" alt="Revenue growth graph" class="w-full h-40 sm:h-32 object-cover rounded" />
-      <div>
-        <div class="text-base sm:text-sm font-semibold">Quarterly Revenue +40%</div>
-        <p class="text-sm sm:text-xs text-gray-600 mt-1">CRO & ad funnel tweaks scaled revenue 40% quarter-over-quarter for a fashion merchant.</p>
-      </div>
-    </div>
-  </section>
-      <!-- NEW: Comprehensive Store Growth Services -->
+      <!-- Comprehensive Store Growth Services -->
       <div class="card p-6 space-y-4">
         <h3 class="font-semibold text-lg mb-2">Comprehensive Store Growth Services</h3>
         <p class="text-sm kicker">Our certified specialist network provides end-to-end merchant support:</p>
