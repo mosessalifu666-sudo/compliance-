@@ -140,35 +140,37 @@ body{background:var(--bg);color:#0f172a}
   </header>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <!-- LEFT column -->
-    <aside class="card p-6">
-      <div class="flex items-center gap-4">
-        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--green)] text-white flex items-center justify-center text-xl font-semibold">JM</div>
-        <div>
-          <div class="text-lg font-semibold">Juan Manuel</div>
-          <div class="text-sm text-[var(--muted)]">Shopify Compliance & Growth Specialist</div>
-        </div>
-      </div>
+   <!-- LEFT column -->
+<aside class="card p-6 flex flex-col gap-4">
+  <div class="flex items-center gap-4">
+    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--green)] text-white flex items-center justify-center text-xl font-semibold">JM</div>
+    <div>
+      <div class="text-lg font-semibold">Juan Manuel</div>
+      <div class="text-sm text-[var(--muted)]">Shopify Compliance & Growth Specialist</div>
+    </div>
+  </div>
 
-      <p class="text-sm text-[var(--muted)] mt-4">I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started</p>
+  <p class="text-sm text-[var(--muted)]">
+    I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started
+  </p>
 
-      <div class="grid gap-3">
-        <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
-          <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
-        </button>
-        <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--telegram)] text-white py-2.5 rounded-md focus-ring">
-          <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
-        </button>
-        <button onclick="openForm('email')" class="w-full inline-flex items-center justify-center gap-3 bg-gray-800 text-white py-2.5 rounded-md focus-ring">
-          <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
-        </button>
-      </div>
+  <div class="grid gap-2">
+    <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
+      <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
+    </button>
+    <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--telegram)] text-white py-2.5 rounded-md focus-ring">
+      <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
+    </button>
+    <button onclick="openForm('email')" class="w-full inline-flex items-center justify-center gap-3 bg-gray-800 text-white py-2.5 rounded-md focus-ring">
+      <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
+    </button>
+  </div>
 
-      <div class="space-y-2">
-        <h4 class="text-sm font-medium text-gray-700">Advisor stats</h4>
-        <div class="text-sm text-[var(--muted)]">Expert • 5+ years • 50+ stores helped • Rating 4.9/5</div>
-      </div>
-    </aside>
+  <div>
+    <h4 class="text-sm font-medium text-gray-700">Advisor stats</h4>
+    <div class="text-sm text-[var(--muted)]">Expert • 5+ years • 50+ stores helped • Rating 4.9/5</div>
+  </div>
+</aside>
 
     <!-- Right Column -->
     <section class="lg:col-span-2 space-y-6">
@@ -479,3 +481,4 @@ function handleSubmit(e){
 
 </body>
 </html>
+
