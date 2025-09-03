@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shopify Compliance & Growth — Advisor Dashboard</title>
+
+<!-- Tailwind (utility helpers) + Font Awesome -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+<style>
+:root{
+  --green:#5b843c;
+  --teal:#004c3f;
+  --muted:#6b7280;
+  --border:#48604e;
+  --bg:#f4f6f8;       /* SHOPIFY PARTNERS-like background (Polaris grey) */
+  --telegram:#0088cc; /* Telegram blue */
+}
+
+/* Base */
+body{background:var(--bg);color:#0f172a}
+.focus-ring:focus{outline:none;box-shadow:0 0 0 4px rgba(0,128,96,.12)}
+
+/* Steps */
+.step-dot{width:36px;height:36px;border-radius:9999px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:#fff}
+.step-dot.active{background:var(--green);color:white;border-color:var(--green)}
+.step-line{height:2px;background:var(--border);flex:1}
+.step-line.active{background:var(--green)}
+
+/* Card */
+.card{background:white;border:1px solid var(--border);border-radius:12px}
+
+/* Animations */
+.animate-fade-in { animation: fadeIn .18s ease-out; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+.hidden { display: none !important; }
+
+/* Mobile tweaks */
+@media(max-width:640px){
+  .card { padding: 1rem !important; }
+  #dashboard { padding: 1rem !important; }
+  .grid { gap: 1rem !important; }
+  .steps-scroll { overflow-x:auto; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+  .steps-scroll::-webkit-scrollbar { display:none; }
+}
+
+/* Ticker */
+.ticker-wrapper {
+  overflow:hidden;
+  white-space:nowrap;
+  background: #e6f7f1;
+  border-radius: 12px;
+  padding:0.5rem 0;
+}
+.ticker {
+  display:inline-block;
+  padding-left:100%;
+  animation: ticker 20s linear infinite;
+  font-weight:600;
+  color:#008060;
+}
+@keyframes ticker { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
+
+</style>
+</head>
+<body class="font-sans antialiased">
+<!-- Loading -->
+<section id="loading" class="min-h-screen flex items-center justify-center">
+  <div class="max-w-xl w-full p-6 text-center">
+    <img src="https://cdn.shopify.com/assets/images/logos/shopify-bag.png" class="mx-auto h-14 mb-4" alt="Shopify"/>
+    <h1 class="text-2xl font-semibold">Connecting you with a Specialist</h1>
+    <p class="text-sm text-[var(--muted)] mt-2">Preparing your secure session — this takes a moment.</p>
+    <div class="relative mx-auto mt-8 w-28 h-28">
+      <div class="w-28 h-28 rounded-full border-4 border-gray-200"></div>
+      <div class="absolute inset-0 rounded-full border-4 border-[var(--green)] border-t-transparent animate-spin"></div>
+      <div id="pct" class="absolute inset-0 flex items-center justify-center font-medium text-gray-700">0%</div>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboard -->
+<main id="dashboard" class="hidden max-w-6xl mx-auto py-10 px-6 space-y-8">
+  <header class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-4">
+      <img src="https://cdn.shopify.com/assets/images/logos/shopify-bag.png" alt="Shopify" class="h-9"/>
+      <div>
+        <div class="text-lg font-semibold">Shopify Advisor</div>
+        <div class="text-sm text-[var(--muted)]">Helping merchants grow safely & profitably</div>
+      </div>
+    </div>
+    <div class="text-sm inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-700"> 
+      <i class="fa-solid fa-circle text-[8px]"></i> Connected
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- LEFT column: aside goes in Part 3 -->
+    <!-- Left Column -->
+    <aside class="card p-6 space-y-6">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--teal)] to-[var(--green)] text-white flex items-center justify-center text-xl font-semibold">JM</div>
+        <div>
+          <div class="text-lg font-semibold">Juan Manuel</div>
+          <div class="text-sm text-[var(--muted)]">Shopify Compliance & Growth Specialist</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-[var(--muted)] mt-4">I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started</p>
+
+      <div class="grid gap-3">
+        <!-- WhatsApp opens the modal with method=whatsapp -->
+        <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--green)] text-white py-2.5 rounded-md focus-ring">
+          <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
+        </button>
+
+        <!-- Telegram button uses the Telegram blue variable -->
+        <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 bg-[var(--telegram)] text-white py-2.5 rounded-md focus-ring">
+          <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
+        </button>
+
+        <!-- Email -->
+        <button onclick="openForm('email')" class="w-full inline-flex items-center justify-center gap-3 bg-gray-800 text-white py-2.5 rounded-md focus-ring">
+          <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
+        </button>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-sm font-medium text-gray-700">Advisor stats</h4>
+        <div class="text-sm text-[var(--muted)]">Expert • 5+ years • 50+ stores helped • Rating 4.9/5</div>
+      </div>
+    </aside>
+    <!-- Right Column -->
+    <section class="lg:col-span-2 space-y-6">
+      <!-- Services Section -->
+      <div class="card p-6 space-y-4">
+        <h3 class="font-semibold text-lg mb-2">Services & Benefits</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-shield-halved text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">Compliance & Security</div>
+              <div class="text-sm text-[var(--muted)]">Protect your store and payments with expert guidance.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-bullhorn text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">Marketing & Sales Growth</div>
+              <div class="text-sm text-[var(--muted)]">Boost your revenue with tailored campaigns and strategies.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-chart-line text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">SEO & Store Visibility</div>
+              <div class="text-sm text-[var(--muted)]">Improve search ranking and attract more customers.</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <i class="fa-solid fa-gear text-[var(--green)] text-2xl mt-1"></i>
+            <div>
+              <div class="font-medium">Shopify Best Practices</div>
+              <div class="text-sm text-[var(--muted)]">Optimize your store operations and performance for success.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ticket Section -->
+      <div class="card p-6 space-y-4">
+        <div class="flex items-start justify-between">
+          <div>
+            <div class="text-sm text-[var(--muted)]">Ticket</div>
+            <div class="text-xl font-semibold">#SA02-2097</div>
+          </div>
+          <div class="text-sm text-[var(--muted)]">
+            <div>Partner ID: <span class="font-medium">3855889</span></div>
+            <div class="mt-1">Status: <span class="text-green-700 font-medium">Active</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Progress Section -->
+      <div class="card p-6 space-y-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold">Case Progress</h3>
+          <div id="progressLabel" class="text-sm text-[var(--muted)]">Step 2 of 4</div>
+        </div>
+
+        <div class="steps-scroll flex items-center gap-2">
+          <div class="flex items-center gap-2 min-w-[120px]">
+            <div class="step-dot active">1</div>
+            <div class="text-sm ml-2 whitespace-nowrap">Case Created</div>
+          </div>
+          <div class="step-line flex-1 bg-gray-300"></div>
+          <div class="flex items-center gap-2 min-w-[120px]">
+            <div class="step-dot active">2</div>
+            <div class="text-sm ml-2 whitespace-nowrap">Advisor Assigned</div>
+          </div>
+          <div class="step-line flex-1 bg-gray-300"></div>
+          <div class="flex items-center gap-2 min-w-[120px]">
+            <div class="step-dot">3</div>
+            <div class="text-sm ml-2 whitespace-nowrap">Pending Review</div>
+          </div>
+          <div class="step-line flex-1 bg-gray-300"></div>
+          <div class="flex items-center gap-2 min-w-[120px]">
+            <div class="step-dot">4</div>
+            <div class="text-sm ml-2 whitespace-nowrap">Active</div>
+          </div>
+        </div>
+      </div>
+
+        <!-- NEW: Recent Merchant Success Stories -->
+      <div class="card p-6 space-y-4">
+        <h3 class="font-semibold text-lg mb-2">Recent Merchant Success Stories</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border rounded-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop" class="w-full h-32 object-cover" alt="conversion">
+            <div class="p-3">
+              <div class="text-[var(--accent)] font-semibold">+30% conversion</div>
+              <p class="text-sm kicker">Quick checkout fixes & trust badges boosted conversions by 30% in 2 weeks for a wellness brand.</p>
+            </div>
+          </div>
+          <div class="border rounded-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop" class="w-full h-32 object-cover" alt="seo">
+            <div class="p-3">
+              <div class="text-[var(--accent)] font-semibold">+45% organic traffic</div>
+              <p class="text-sm kicker">SEO audit + metadata improvements increased organic visits by 45% in 60 days for a home goods store.</p>
+            </div>
+          </div>
+          <div class="border rounded-lg overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop" class="w-full h-32 object-cover" alt="revenue">
+            <div class="p-3">
+              <div class="text-[var(--accent)] font-semibold">+40% revenue</div>
+              <p class="text-sm kicker">CRO & ad funnel optimization scaled revenue 40% quarter-over-quarter for a fashion merchant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+ <!-- CASE STUDY: Hero images updated per request -->
+  <section class="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+    <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
+      <img src="https://i.pinimg.com/736x/6c/71/e8/6c71e84df436880b442e6598dc4a999e.jpg" alt="Conversion lift chart" class="w-full h-40 sm:h-32 object-cover rounded" />
+      <div>
+        <div class="text-base sm:text-sm font-semibold">+30% Conversion Lift</div>
+        <p class="text-sm sm:text-xs text-gray-600 mt-1">Quick checkout fixes & trust badges boosted conversions by 30% in 2 weeks.</p>
+      </div>
+    </div>
+
+    <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
+      <img src="https://i.pinimg.com/736x/e4/8f/df/e48fdf1b74b2471bf537193df06c01ac.jpg" alt="SEO visibility" class="w-full h-40 sm:h-32 object-cover rounded" />
+      <div>
+        <div class="text-base sm:text-sm font-semibold">SEO & Visibility Gains</div>
+        <p class="text-sm sm:text-xs text-gray-600 mt-1">SEO audit + metadata improvements increased organic visits by 45% in 60 days.</p>
+      </div>
+    </div>
+
+    <div class="p-4 rounded-xl border bg-white flex flex-col gap-3">
+      <img src="https://i.pinimg.com/736x/fb/fa/1d/fbfa1dabc7dd0a3ceec42dd23e140a98.jpg" alt="Revenue growth graph" class="w-full h-40 sm:h-32 object-cover rounded" />
+      <div>
+        <div class="text-base sm:text-sm font-semibold">Quarterly Revenue +40%</div>
+        <p class="text-sm sm:text-xs text-gray-600 mt-1">CRO & ad funnel tweaks scaled revenue 40% quarter-over-quarter for a fashion merchant.</p>
+      </div>
+    </div>
+  </section>
+      <!-- NEW: Comprehensive Store Growth Services -->
+      <div class="card p-6 space-y-4">
+        <h3 class="font-semibold text-lg mb-2">Comprehensive Store Growth Services</h3>
+        <p class="text-sm kicker">Our certified specialist network provides end-to-end merchant support:</p>
+        <ul class="list-disc list-inside space-y-1 text-sm kicker">
+          <li>Store compliance audit & policy review</li>
+          <li>Technical SEO optimization & site speed improvements</li>
+          <li>Conversion rate optimization & A/B testing</li>
+          <li>Shopify Plus migration & custom development</li>
+          <li>Payment gateway optimization & fraud prevention</li>
+          <li>Marketing automation & customer retention strategies</li>
+          <li>App integration & workflow optimization</li>
+          <li>Analytics setup & performance monitoring</li>
+          <li>Security headers & GDPR compliance implementation</li>
+          <li>24/7 merchant support & emergency response</li>
+        </ul>
+      </div>
+
+      <!-- Sliding Ticker Text -->
+      <div class="ticker-wrapper">
+        <div class="ticker">
+          🚀 Boost your Shopify store performance! • ⚡ Resolve compliance issues instantly! • 📈 Increase your SEO visibility and sales! • 💡 Expert marketing guidance!
+        </div>
+      </div>
+    </section>
+  </div> <!-- END grid -->
+</main>
+<!-- Modal Contact Form -->
+<div id="modal" class="fixed inset-0 hidden items-center justify-center z-50 px-4">
+  <div class="bg-white w-full max-w-2xl rounded-lg p-6 card animate-fade-in">
+    <div class="flex items-start justify-between">
+      <div>
+        <h3 class="text-lg font-semibold">Contact Advisor</h3>
+        <div class="text-sm text-[var(--muted)]">Ticket <span id="ticketRef" class="font-medium">#SA02-2097</span></div>
+      </div>
+      <button aria-label="Close" id="modalCloseBtn" class="text-gray-500 hover:text-gray-800"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="contactForm" class="mt-4 space-y-4" onsubmit="handleSubmit(event)">
+      <input type="hidden" id="methodField" />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-gray-700">Ticket ID</label>
+          <input id="ticketInput" type="text" value="#SA02-2097" readonly class="w-full border border-[var(--border)] rounded-md px-3 py-2 bg-gray-50 text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Store URL</label>
+          <input id="storeInput" type="text" class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="yourstore.myshopify.com" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Email address</label>
+          <input id="emailInput" type="text" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="you@example.com" />
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700">Issue type</label>
+          <select id="issueInput" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm">
+            <option value="">Select an issue</option>
+            <option>Compliance Warning</option>
+            <option>Checkout or Payment Issues</option>
+            <option>Store Visibility / SEO</option>
+            <option>Sales Performance</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-700">Your name</label>
+        <input id="nameInput" type="text" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-700">Message</label>
+        <textarea id="messageInput" rows="4" required class="w-full border border-[var(--border)] rounded-md px-3 py-2 focus-ring text-sm" placeholder="Summary of the issue..."></textarea>
+      </div>
+      <div class="flex items-center justify-end gap-3">
+        <button type="button" id="cancelBtn" class="px-4 py-2 rounded-md border">Cancel</button>
+        <button id="submitBtn" type="submit" class="px-4 py-2 rounded-md bg-[var(--green)] text-white inline-flex items-center gap-2">
+          <span class="label">Submit</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Floating WhatsApp/Telegram/Email Widget -->
+<div id="whatsappPopup" class="fixed bottom-20 right-6 w-80 hidden z-50">
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden animate-fade-in">
+    <div class="bg-[var(--green)] text-white px-4 py-3 flex items-center gap-3">
+      <img id="waStaffImg" src="https://i.pravatar.cc/80?img=12" alt="Advisor" class="w-10 h-10 rounded-full border-2 border-white">
+      <div>
+        <div class="font-semibold">Juan Manuel</div>
+        <div class="text-xs opacity-90">Shopify Compliance & Growth Specialist</div>
+      </div>
+      <button id="waCloseBtn" class="ml-auto text-white/90 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="p-4 text-sm text-gray-600">
+      👋 Hi — I help you with compliance, payments, SEO, marketing & sales. Start a chat and I’ll guide you through.
+    </div>
+    <div class="px-4 pb-4">
+      <a href="https://wa.me/2349135251130" target="_blank" class="w-full block bg-[var(--green)] text-white py-2.5 rounded-lg text-center mb-2"><i class="fa-brands fa-whatsapp"></i> Start Chat</a>
+      <a href="https://t.me/JuanShopifyadvisor" target="_blank" class="w-full block bg-[var(--telegram)] text-white py-2.5 rounded-lg text-center mb-2"><i class="fa-brands fa-telegram"></i> Message (Telegram)</a>
+      <a href="mailto:juan.shopifyagent@gmail.com" class="w-full block bg-gray-800 text-white py-2.5 rounded-lg text-center"><i class="fa-solid fa-envelope"></i> Send Email</a>
+    </div>
+  </div>
+</div>
+
+<!-- Trigger Button -->
+<button id="waTriggerBtn" class="fixed bottom-6 right-6 z-50 rounded-full p-4 bg-[var(--green)] text-white shadow-lg hover:bg-green-700 focus-ring">
+  <i class="fa-brands fa-whatsapp text-2xl"></i>
+</button>
+<script>
+// Loading animation
+const loading = document.getElementById('loading');
+const dashboard = document.getElementById('dashboard');
+const pct = document.getElementById('pct');
+let value = 0;
+const t = setInterval(()=>{
+  value = Math.min(100,value + Math.floor(Math.random()*7)+3);
+  pct.textContent = value + '%';
+  if(value>=100){
+    clearInterval(t);
+    loading.classList.add('hidden');
+    dashboard.classList.remove('hidden');
+  }
+},110);
+
+// Modal & widgets
+const modal = document.getElementById('modal');
+const contactForm = document.getElementById('contactForm');
+const methodField = document.getElementById('methodField');
+const waPopup = document.getElementById('whatsappPopup');
+
+document.getElementById('waTriggerBtn').addEventListener('click', ()=> waPopup.classList.toggle('hidden'));
+document.getElementById('waCloseBtn').addEventListener('click', ()=> waPopup.classList.add('hidden'));
+document.getElementById('waOpenBtn').addEventListener('click', ()=> openForm('whatsapp'));
+document.getElementById('cancelBtn').addEventListener('click', ()=> closeForm());
+document.getElementById('modalCloseBtn').addEventListener('click', ()=> closeForm());
+
+function openForm(method){
+  methodField.value = method;
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+function closeForm(){
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+  contactForm.reset();
+}
+
+// Submission
+function handleSubmit(e){
+  e.preventDefault();
+  const method = methodField.value;
+  const ticket = document.getElementById('ticketInput').value;
+  const store = document.getElementById('storeInput').value;
+  const email = document.getElementById('emailInput').value;
+  const issue = document.getElementById('issueInput').value;
+  const name = document.getElementById('nameInput').value;
+  const message = document.getElementById('messageInput').value;
+  let url='';
+  const body = encodeURIComponent(
+    'Ticket: ' + ticket + '\n' +
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    'Store: ' + store + '\n' +
+    'Issue: ' + issue + '\n' +
+    'Message: ' + message
+  );
+
+  if(method==='whatsapp') url='https://wa.me/2349135251130?text=' + body;
+  else if(method==='telegram') url='https://t.me/JuanShopifyadvisor'; // <- TELEGRAM LINK
+  else if(method==='email') url='mailto:juan.shopifyagent@gmail.com?subject=Support Request&body=' + body;
+
+  window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>
