@@ -430,16 +430,16 @@ h1, h2, h3, h4 {
 <body>
 
 <!-- Loading -->
-<section id="loading" class="min-h-screen flex items-center justify-center">
+<section id="loading" class="min-h-screen flex items-center justify-center" style="background: linear-gradient(135deg, #2a2e57 0%, #2f6164 100%);">
   <div class="max-w-xl w-full p-6 text-center">
     <img src="https://cdn.shopify.com/assets/images/logos/shopify-bag.png" class="mx-auto h-14 mb-4" alt="Shopify"/>
-    <h1 class="text-2xl font-semibold">Connecting you with a Specialist</h1>
-    <p class="text-sm text-[var(--muted)] mt-2">Preparing your secure session — this takes a moment.</p>
+    <h1 class="text-2xl font-semibold text-white">Connecting you with a Specialist</h1>
+<p class="mt-2" style="color: rgba(255, 255, 255, 0.6);">Preparing your secure session — this takes a moment.</p>
+
     <div class="relative mx-auto mt-8 w-28 h-28">
       <div class="w-28 h-28 rounded-full border-4 border-gray-200"></div>
       <div class="absolute inset-0 rounded-full border-4 border-[var(--green)] border-t-transparent animate-spin"></div>
-      <div id="pct" class="absolute inset-0 flex items-center justify-center font-medium text-gray-700">0%</div>
-    </div>
+      <div id="pct" class="absolute inset-0 flex items-center justify-center font-medium text-white">0%</div>
   </div>
 </section>
 
@@ -881,5 +881,6 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
 
