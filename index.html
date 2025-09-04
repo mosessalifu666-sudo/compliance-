@@ -721,14 +721,192 @@ h1, h2, h3, h4 {
         </div>
       </div>
 
-      <!-- Sliding Ticker Text -->
-      <div class="ticker-wrapper">
-        <div class="ticker">
-          🚀 Boost your Shopify store performance! • ⚡ Resolve compliance issues instantly! • 📈 Increase your SEO visibility and sales! • 💡 Expert marketing guidance!
-        </div>
-      </div>
-    </section>
-  </div> <!-- END grid -->
+  <!-- Premium Ticker with Pro Slideshow + Captions -->
+<section class="ticker-section">
+  <!-- Ticker text -->
+  <div class="ticker-wrapper">
+    <div class="ticker">
+      🚀 Boost your Shopify store performance! • ⚡ Resolve compliance issues instantly! • 📈 Increase your SEO visibility and sales! • 💡 Expert marketing guidance!
+    </div>
+  </div>
+
+  <!-- Pro Fading Images with Captions -->
+  <div class="fade-images">
+    <div class="image-slide active">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid1.webp" alt="Billionaire Boys Club">
+      <div class="caption">Billionaire Boys Club</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid5.webp" alt="Gray Nicolls Cricket">
+      <div class="caption">Gray Nicolls Cricket</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid6.webp" alt="CleanCo">
+      <div class="caption">CleanCo</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid9.webp" alt="RNLI">
+      <div class="caption">RNLI</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid10.webp" alt="Sunnamusk">
+      <div class="caption">Sunnamusk</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid14.webp" alt="Case furniture">
+      <div class="caption">Case Furniture</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid2.webp" alt="Cambridge Satchel">
+      <div class="caption">Cambridge Satchel</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid4.webp" alt="Candy Kittens">
+      <div class="caption">Candy Kittens</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid7.webp" alt="Gilbert Rugby">
+      <div class="caption">Gilbert Rugby</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid8.webp" alt="Unndr">
+      <div class="caption">Unndr</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid13.webp" alt="Bio&Me">
+      <div class="caption">Bio&Me</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid11.webp" alt="Vollebak">
+      <div class="caption">Vollebak</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid3.webp" alt="111Skin">
+      <div class="caption">111Skin</div>
+    </div>
+    <div class="image-slide">
+      <img src="https://www.charleagency.com/assets/images/home/grid/grid12.webp" alt="Muc-Off">
+      <div class="caption">Muc-Off</div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Layout wrapper */
+.ticker-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  text-align: center;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+/* Premium ticker bar */
+.ticker-wrapper {
+  overflow: hidden;
+  background: linear-gradient(90deg, #111, #333);
+  color: #fff;
+  white-space: nowrap;
+  border-radius: 40px;
+  padding: 14px 0;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.ticker {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 25s linear infinite;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Pro fading slideshow */
+.fade-images {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.image-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out, transform 6s ease;
+}
+
+.image-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+}
+
+.image-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.image-slide.active img {
+  transform: scale(1);
+}
+
+/* Captions */
+.caption {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: 4;
+}
+
+.image-slide.active .caption {
+  opacity: 1;
+}
+
+/* Gradient overlay */
+.fade-images::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 20px;
+}
+</style>
+
+<script>
+let index = 0;
+const slides = document.querySelectorAll(".image-slide");
+
+function showNextImage() {
+  slides[index].classList.remove("active");
+  index = (index + 1) % slides.length;
+  slides[index].classList.add("active");
+}
+
+setInterval(showNextImage, 5000); // 5s per slide
+</script>
+ <!-- END grid -->
 </main>
 
 <!-- Modal Contact Form -->
@@ -765,8 +943,9 @@ h1, h2, h3, h4 {
             <option>Compliance Warning</option>
             <option>Checkout or Payment Issues</option>
             <option>Store Visibility / SEO</option>
-            <option>Sales Performance</option>
-            <option>Other</option>
+            <option>Salers permit</option>
+            <option>Low sales</option>
+             <option>Other</option>
           </select>
         </div>
       </div>
@@ -892,4 +1071,5 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
