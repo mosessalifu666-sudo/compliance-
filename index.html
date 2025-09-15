@@ -462,46 +462,82 @@ h1, h2, h3, h4 {
     </div>
   </header>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    
-    <!-- Left Column - Shopify Card Style -->
-    <aside class="card p-6 space-y-6 h-fit">
-      <div class="text-center">
-        <!-- Profile Image -->
-        <div class="profile-professional w-20 h-20 mx-auto mb-4">
-          <img src="https://i.pinimg.com/736x/2f/53/58/2f535867ec2ea063d07e3c4148d18cf8.jpg" alt="Juan Manuel" class="w-full h-full object-cover rounded-full">
-        </div>
-        <h2 class="text-xl font-bold text-gray-900">Juan Manuel<span class="inline-flex items-center">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-    <path fill="#34B7F1" d="M12 2.25l2.317 1.178 2.567-.001 1.178 2.317 2.317 1.178-.001 2.567 1.178 2.317-1.178 2.317.001 2.567-2.317 1.178-1.178 2.317-2.567-.001L12 21.75l-2.317-1.178-2.567.001-1.178-2.317-2.317-1.178.001-2.567L2.25 12l1.178-2.317-.001-2.567 2.317-1.178L6.922 3.427l2.567.001L12 2.25z"/>
-    <path fill="#fff" d="M10.6 14.6l-2.2-2.2 1.1-1.1 1.1 1.1 4.4-4.4 1.1 1.1-5.5 5.5z"/>
-  </svg>
-</span>
-</h2>
-        <p class="text-sm text-gray-600 font-medium">Shopify Compliance & Growth Specialist</p>
-      </div>
+<!-- Full-Screen Profile Card (Desktop Centered) -->
+<div class="w-full min-h-screen flex items-center justify-center bg-gray-50 px-6">
+  <aside class="relative w-full max-w-4xl p-8 rounded-2xl shadow-xl bg-white/90 backdrop-blur-md border border-gray-200 
+               hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out space-y-6">
+    <!-- Floating Glow Effect -->
+    <div class="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-green-200 via-transparent to-blue-200 opacity-0 hover:opacity-70 blur-2xl transition duration-700"></div>
 
-      <p class="text-sm text-gray-700 leading-relaxed text-center">
-        I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started
-      </p>
-
-      <div class="space-y-3">
-        <button id="waOpenBtn" class="w-full inline-flex items-center justify-center gap-3 btn-shopify py-3 rounded-lg focus-ring font-semibold">
-          <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
-        </button>
-        <button onclick="openForm('telegram')" class="w-full inline-flex items-center justify-center gap-3 btn-wix py-3 rounded-lg focus-ring font-semibold">
-          <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
-        </button>
-        <button onclick="openForm('email')" class="w-full inline-flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg focus-ring font-semibold transition-all duration-200">
-          <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
-        </button>
+    <!-- Profile -->
+    <div class="text-center animate-fadeIn">
+      <div class="w-24 h-24 mx-auto mb-4 relative">
+        <img src="https://i.pinimg.com/736x/2f/53/58/2f535867ec2ea063d07e3c4148d18cf8.jpg" 
+             alt="Juan Manuel" 
+             class="w-full h-full object-cover rounded-full border-4 border-white shadow-md">
+        <span class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full animate-pulse"></span>
       </div>
+      <h2 class="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2">
+        Juan Manuel
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
+          <path fill="#34B7F1" d="M12 2.25l2.317 1.178 2.567-.001 1.178 2.317 2.317 1.178-.001 2.567 1.178 2.317-1.178 2.317.001 2.567-2.317 1.178-1.178 2.317-2.567-.001L12 21.75l-2.317-1.178-2.567.001-1.178-2.317-2.317-1.178.001-2.567L2.25 12l1.178-2.317-.001-2.567 2.317-1.178L6.922 3.427l2.567.001L12 2.25z"/>
+          <path fill="#fff" d="M10.6 14.6l-2.2-2.2 1.1-1.1 1.1 1.1 4.4-4.4 1.1 1.1-5.5 5.5z"/>
+        </svg>
+      </h2>
+      <p class="text-sm text-gray-600 font-medium">Shopify Compliance & Growth Specialist</p>
+    </div>
 
-      <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
-        <h4 class="text-sm font-bold text-gray-900 mb-2">Advisor Stats</h4>
-        <div class="text-sm text-gray-700 font-medium">Expert • 5+ years • 300+ stores helped • Rating 4.9/5</div>
+    <!-- Bio -->
+    <p class="text-sm text-gray-700 leading-relaxed text-center max-w-2xl mx-auto animate-slideUp">
+      I help Shopify store owners resolve compliance challenges and unlock growth with tailored marketing, SEO, and performance optimization strategies. Share your case to get started.
+    </p>
+
+    <!-- Contact Buttons -->
+    <div class="space-y-3 max-w-md mx-auto">
+      <button id="waOpenBtn" class="relative w-full inline-flex items-center justify-center gap-3 py-3 rounded-lg font-semibold
+                   bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg hover:shadow-xl overflow-hidden group">
+        <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></span>
+        <i class="fa-brands fa-whatsapp"></i><span>Contact via WhatsApp</span>
+      </button>
+
+      <button onclick="openForm('telegram')" class="relative w-full inline-flex items-center justify-center gap-3 py-3 rounded-lg font-semibold
+                   bg-gradient-to-r from-sky-400 to-sky-600 text-white shadow-lg hover:shadow-xl overflow-hidden group">
+        <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></span>
+        <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
+      </button>
+
+      <button onclick="openForm('email')" class="relative w-full inline-flex items-center justify-center gap-3 py-3 rounded-lg font-semibold
+                   bg-gray-900 text-white shadow-lg hover:shadow-xl overflow-hidden group">
+        <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></span>
+        <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-gray-200 shadow-sm animate-fadeIn delay-200 text-center">
+      <h4 class="text-sm font-bold text-gray-900 mb-2">Advisor Stats</h4>
+      <div class="text-sm text-gray-700 font-medium">
+        ⭐ Expert • 5+ years • 300+ stores helped • Rating 4.9/5
       </div>
-    </aside>
+    </div>
+  </aside>
+</div>
+
+<!-- Animations -->
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn { animation: fadeIn 0.8s ease forwards; }
+  .animate-slideUp { animation: slideUp 0.9s ease forwards; }
+  .delay-200 { animation-delay: 0.2s; }
+</style>
+
 
       </div>
       <div class="hero-gallery__main-image">
@@ -1283,6 +1319,7 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
 
 
