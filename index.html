@@ -670,7 +670,12 @@ h1, h2, h3, h4 {
           </div>
         </div>
       </section>
-<!-- Comprehensive Store Growth Services -->
+<!-- ============================
+  Comprehensive Store Growth Services
+  (All 10 services wired to modal + WhatsApp)
+  Replace phoneNumber below before use.
+  ============================ -->
+
 <div class="card p-8">
   <h3 class="shopify-heading text-2xl mb-4">Comprehensive Store Growth Services</h3>
   <p class="text-base text-gray-700 mb-6 font-medium">
@@ -678,9 +683,9 @@ h1, h2, h3, h4 {
   </p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    
-    <!-- Service 1 -->
-    <a href="#compliance-audit" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 1 -->
+    <button onclick="openModal('Store compliance audit & policy review','Starting at $199')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -689,10 +694,11 @@ h1, h2, h3, h4 {
       </div>
       <p class="text-sm text-gray-600 mb-2">Ensure your store meets Shopify and legal compliance standards.</p>
       <div class="text-green-700 font-semibold">Starting at $199</div>
-    </a>
+    </button>
 
-    <!-- Service 2 -->
-    <a href="#seo-optimization" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 2 -->
+    <button onclick="openModal('Technical SEO optimization & site speed improvements','Starting at $299')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -700,11 +706,12 @@ h1, h2, h3, h4 {
         <span class="text-gray-800 font-medium">Technical SEO optimization & site speed improvements</span>
       </div>
       <p class="text-sm text-gray-600 mb-2">Boost visibility and user experience with SEO + speed fixes.</p>
-      <div class="text-green-700 font-semibold">Starting at $399</div>
-    </a>
+      <div class="text-green-700 font-semibold">Starting at $299</div>
+    </button>
 
-    <!-- Service 3 -->
-    <a href="#cro-testing" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 3 -->
+    <button onclick="openModal('Conversion rate optimization & A/B testing','Starting at $249')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -713,10 +720,11 @@ h1, h2, h3, h4 {
       </div>
       <p class="text-sm text-gray-600 mb-2">Run A/B tests and CRO strategies to maximize conversions.</p>
       <div class="text-green-700 font-semibold">Starting at $249</div>
-    </a>
+    </button>
 
-    <!-- Service 4 -->
-    <a href="#shopify-plus" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 4 -->
+    <button onclick="openModal('Shopify Plus migration & custom development','Starting at $499')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -725,10 +733,11 @@ h1, h2, h3, h4 {
       </div>
       <p class="text-sm text-gray-600 mb-2">Migrate to Shopify Plus with custom features & scalability.</p>
       <div class="text-green-700 font-semibold">Starting at $499</div>
-    </a>
+    </button>
 
-    <!-- Service 5 -->
-    <a href="#payment-gateway" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 5 -->
+    <button onclick="openModal('Payment gateway optimization & fraud prevention','Starting at $179')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -736,23 +745,25 @@ h1, h2, h3, h4 {
         <span class="text-gray-800 font-medium">Payment gateway optimization & fraud prevention</span>
       </div>
       <p class="text-sm text-gray-600 mb-2">Optimize payments and safeguard transactions against fraud.</p>
-      <div class="text-green-700 font-semibold">Starting at $199</div>
-    </a>
+      <div class="text-green-700 font-semibold">Starting at $179</div>
+    </button>
 
-    <!-- Service 6 -->
-    <a href="#marketing-automation" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 6 -->
+    <button onclick="openModal('Marketing automation & customer retention strategies','Starting at $229')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
-        <span class="text-gray-800 font-medium">Marketing automation & customer retention</span>
+        <span class="text-gray-800 font-medium">Marketing automation & customer retention strategies</span>
       </div>
       <p class="text-sm text-gray-600 mb-2">Automate marketing & boost repeat sales with loyalty flows.</p>
-      <div class="text-green-700 font-semibold">Starting at $259</div>
-    </a>
+      <div class="text-green-700 font-semibold">Starting at $229</div>
+    </button>
 
-    <!-- Service 7 -->
-    <a href="#app-integration" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 7 -->
+    <button onclick="openModal('App integration & workflow optimization','Starting at $199')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -760,11 +771,12 @@ h1, h2, h3, h4 {
         <span class="text-gray-800 font-medium">App integration & workflow optimization</span>
       </div>
       <p class="text-sm text-gray-600 mb-2">Seamlessly connect apps & automate store processes.</p>
-      <div class="text-green-700 font-semibold">Starting at $300</div>
-    </a>
+      <div class="text-green-700 font-semibold">Starting at $299</div>
+    </button>
 
-    <!-- Service 8 -->
-    <a href="#analytics" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 8 -->
+    <button onclick="openModal('Analytics setup & performance monitoring','Starting at $149')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -773,22 +785,24 @@ h1, h2, h3, h4 {
       </div>
       <p class="text-sm text-gray-600 mb-2">Get full insights with analytics setup and reporting.</p>
       <div class="text-green-700 font-semibold">Starting at $149</div>
-    </a>
+    </button>
 
-    <!-- Service 9 -->
-    <a href="#gdpr" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 9 -->
+    <button onclick="openModal('Security headers & GDPR compliance implementation','Starting at $259')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
-        <span class="text-gray-800 font-medium">Security headers & GDPR compliance</span>
+        <span class="text-gray-800 font-medium">Security headers & GDPR compliance implementation</span>
       </div>
       <p class="text-sm text-gray-600 mb-2">Protect data & ensure GDPR compliance for your store.</p>
       <div class="text-green-700 font-semibold">Starting at $259</div>
-    </a>
+    </button>
 
-    <!-- Service 10 -->
-    <a href="#support" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
+    <!-- 10 -->
+    <button onclick="openModal('24/7 merchant support & emergency response','Starting at $99/mo')"
+      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -797,16 +811,134 @@ h1, h2, h3, h4 {
       </div>
       <p class="text-sm text-gray-600 mb-2">Round-the-clock support to handle urgent store issues.</p>
       <div class="text-green-700 font-semibold">Starting at $99/monthly</div>
-    </a>
-
+    </button>
   </div>
 </div>
 
-  <!-- Premium Ticker with Pro Slideshow + Captions -->
+<!-- Modal (hidden by default) -->
+<div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+     role="dialog" aria-modal="true" aria-labelledby="modalServiceTitle">
+  <div class="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 relative mx-4">
+    <!-- Close -->
+    <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800" aria-label="Close">
+      ✖
+    </button>
+
+    <!-- Title shows what was clicked -->
+    <h2 id="modalServiceTitle" class="text-xl font-semibold mb-2 text-gray-800">Request:</h2>
+    <p id="modalServicePrice" class="text-sm text-gray-600 mb-4"></p>
+
+    <!-- Form -->
+    <form id="serviceForm" class="space-y-4" autocomplete="off">
+      <input type="hidden" id="serviceName" name="service">
+      <input type="hidden" id="servicePrice" name="price">
+
+      <div>
+        <label for="userName" class="block text-sm font-medium text-gray-700">Name</label>
+        <input id="userName" name="name" type="text" required
+               class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200" />
+      </div>
+
+      <div>
+        <label for="userEmail" class="block text-sm font-medium text-gray-700">Email</label>
+        <input id="userEmail" name="email" type="email" required
+               class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200" />
+      </div>
+
+      <div>
+        <label for="userMessage" class="block text-sm font-medium text-gray-700">Message</label>
+        <textarea id="userMessage" name="message" rows="3"
+                  class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200"
+                  placeholder="Any additional details (optional)"></textarea>
+      </div>
+
+      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+        Submit via WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ====== IMPORTANT ======
+  // Replace with your WhatsApp number in international format (no +, no leading zeros)
+  // Example: '14155552671' for +1 415-555-2671
+  const phoneNumber = "+2347037809209";
+
+  // open modal and populate service info
+  function openModal(serviceName, price) {
+    const modal = document.getElementById('serviceModal');
+    document.getElementById('modalServiceTitle').innerText = "Request: " + serviceName;
+    document.getElementById('modalServicePrice').innerText = price || "";
+    document.getElementById('serviceName').value = serviceName;
+    document.getElementById('servicePrice').value = price || "";
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.classList.add('overflow-hidden'); // prevent background scroll
+    // focus the first input for accessibility
+    setTimeout(() => document.getElementById('userName').focus(), 80);
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('serviceModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  // close when clicking outside modal content
+  document.getElementById('serviceModal').addEventListener('click', function (e) {
+    if (e.target === this) closeModal();
+  });
+
+  // close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !document.getElementById('serviceModal').classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+
+  // Handle form submit -> redirect to WhatsApp with prefilled message
+  document.getElementById('serviceForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // basic values
+    const service = document.getElementById('serviceName').value.trim();
+    const price = document.getElementById('servicePrice').value.trim();
+    const name = document.getElementById('userName').value.trim();
+    const email = document.getElementById('userEmail').value.trim();
+    const message = document.getElementById('userMessage').value.trim();
+
+    // ensure phone number set
+    if (!phoneNumber || phoneNumber === "1234567890") {
+      alert("Please set your WhatsApp phone number in the script before using this form.");
+      return;
+    }
+
+    // build message
+    const whatsappMessage = [
+      "*Service Request*",
+      "",
+      `Service: ${service}`,
+      `Price: ${price}`,
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Message: ${message || "-"}`,
+    ].join("\n");
+
+    const url = `https://wa.me/+234737809209?text=${encodeURIComponent(whatsappMessage)}`;
+
+    // close modal then open WhatsApp in a new tab
+    closeModal();
+    window.open(url, "_blank");
+  });
+</script>
+
+    <!-- Premium Ticker with Pro Slideshow + Captions -->
 <section class="ticker-section">
   <!-- Ticker text -->
   <div class="ticker-wrapper">
-    <div class="ticker">
+    <div class="ticker">    
       🚀 Boost your Shopify store performance! • ⚡ Resolve compliance issues instantly! • 📈 Increase your SEO visibility and sales! • 💡 Expert marketing guidance!
     </div>
   </div>
