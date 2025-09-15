@@ -910,7 +910,7 @@ h1, h2, h3, h4 {
     const message = document.getElementById('userMessage').value.trim();
 
     // ensure phone number set
-    if (!phoneNumber || phoneNumber === "1234567890") {
+    if (!phoneNumber || phoneNumber === "2347037809209") {
       alert("Please set your WhatsApp phone number in the script before using this form.");
       return;
     }
@@ -918,15 +918,15 @@ h1, h2, h3, h4 {
     // build message
     const whatsappMessage = [
       "*Service Request*",
-      "",
       `Service: ${service}`,
-      `Price: ${price}`,
+       `Price: ${price}`,
+       `Ticket ID: ${SA02-2097}`,
       `Name: ${name}`,
       `Email: ${email}`,
       `Message: ${message || "-"}`,
     ].join("\n");
 
-    const url = `https://wa.me/+234737809209?text=${encodeURIComponent(whatsappMessage)}`;
+    const url = `https://wa.me/+2347037809209?text=${encodeURIComponent(whatsappMessage)}`;
 
     // close modal then open WhatsApp in a new tab
     closeModal();
@@ -1307,6 +1307,7 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
 
 
