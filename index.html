@@ -462,7 +462,7 @@ h1, h2, h3, h4 {
     </div>
   </header>
 
-<!-- Full-Screen Profile Card (Desktop Centered) -->
+ <!-- Full-Screen Profile Card (Desktop Centered) -->
 <div class="w-full min-h-screen flex items-center justify-center bg-gray-50 px-6">
   <aside class="relative w-full max-w-4xl p-8 rounded-2xl shadow-xl bg-white/90 backdrop-blur-md border border-gray-200 
                hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out space-y-6">
@@ -537,7 +537,14 @@ h1, h2, h3, h4 {
   .animate-slideUp { animation: slideUp 0.9s ease forwards; }
   .delay-200 { animation-delay: 0.2s; }
 </style>
-
+ <!-- Premium Ticker with Pro Slideshow + Captions -->
+<section class="ticker-section">
+  <!-- Ticker text -->
+  <div class="ticker-wrapper">
+    <div class="ticker">
+      🚀 Boost your Shopify store performance! • ⚡ Resolve compliance issues instantly! • 📈 Increase your SEO visibility and sales! • 💡 Expert marketing guidance!
+    </div>
+  </div>
 
       </div>
       <div class="hero-gallery__main-image">
@@ -714,9 +721,9 @@ h1, h2, h3, h4 {
   </p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    
     <!-- Service 1 -->
-    <button onclick="openModal('Store compliance audit & policy review', '$199')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#compliance-audit" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -725,11 +732,10 @@ h1, h2, h3, h4 {
       </div>
       <p class="text-sm text-gray-600 mb-2">Ensure your store meets Shopify and legal compliance standards.</p>
       <div class="text-green-700 font-semibold">Starting at $199</div>
-    </button>
+    </a>
 
     <!-- Service 2 -->
-    <button onclick="openModal('Technical SEO optimization & site speed improvements', '$299')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#seo-optimization" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
@@ -737,223 +743,108 @@ h1, h2, h3, h4 {
         <span class="text-gray-800 font-medium">Technical SEO optimization & site speed improvements</span>
       </div>
       <p class="text-sm text-gray-600 mb-2">Boost visibility and user experience with SEO + speed fixes.</p>
-      <div class="text-green-700 font-semibold">Starting at $299</div>
-    </button>
+      <div class="text-green-700 font-semibold">Starting at $399</div>
+    </a>
 
     <!-- Service 3 -->
-    <button onclick="openModal('Conversion rate optimization & A/B testing', '$249')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#cro-testing" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
         <span class="text-gray-800 font-medium">Conversion rate optimization & A/B testing</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Increase sales with data-driven CRO strategies.</p>
+      <p class="text-sm text-gray-600 mb-2">Run A/B tests and CRO strategies to maximize conversions.</p>
       <div class="text-green-700 font-semibold">Starting at $249</div>
-    </button>
+    </a>
 
     <!-- Service 4 -->
-    <button onclick="openModal('Shopify Plus migration & custom development', '$499')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#shopify-plus" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
         <span class="text-gray-800 font-medium">Shopify Plus migration & custom development</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Seamlessly migrate or customize your Shopify Plus store.</p>
+      <p class="text-sm text-gray-600 mb-2">Migrate to Shopify Plus with custom features & scalability.</p>
       <div class="text-green-700 font-semibold">Starting at $499</div>
-    </button>
+    </a>
 
     <!-- Service 5 -->
-    <button onclick="openModal('Payment gateway optimization & fraud prevention', '$179')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#payment-gateway" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
         <span class="text-gray-800 font-medium">Payment gateway optimization & fraud prevention</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Protect revenue and optimize checkout for smooth transactions.</p>
-      <div class="text-green-700 font-semibold">Starting at $179</div>
-    </button>
+      <p class="text-sm text-gray-600 mb-2">Optimize payments and safeguard transactions against fraud.</p>
+      <div class="text-green-700 font-semibold">Starting at $199</div>
+    </a>
 
     <!-- Service 6 -->
-    <button onclick="openModal('Marketing automation & customer retention strategies', '$299')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#marketing-automation" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
-        <span class="text-gray-800 font-medium">Marketing automation & customer retention strategies</span>
+        <span class="text-gray-800 font-medium">Marketing automation & customer retention</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Engage customers and boost repeat sales with automation.</p>
-      <div class="text-green-700 font-semibold">Starting at $299</div>
-    </button>
+      <p class="text-sm text-gray-600 mb-2">Automate marketing & boost repeat sales with loyalty flows.</p>
+      <div class="text-green-700 font-semibold">Starting at $259</div>
+    </a>
 
     <!-- Service 7 -->
-    <button onclick="openModal('App integration & workflow optimization', '$199')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#app-integration" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
         <span class="text-gray-800 font-medium">App integration & workflow optimization</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Save time by integrating apps and automating tasks.</p>
-      <div class="text-green-700 font-semibold">Starting at $199</div>
-    </button>
+      <p class="text-sm text-gray-600 mb-2">Seamlessly connect apps & automate store processes.</p>
+      <div class="text-green-700 font-semibold">Starting at $300</div>
+    </a>
 
     <!-- Service 8 -->
-    <button onclick="openModal('Analytics setup & performance monitoring', '$159')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#analytics" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
         <span class="text-gray-800 font-medium">Analytics setup & performance monitoring</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Track KPIs with accurate analytics and reporting.</p>
-      <div class="text-green-700 font-semibold">Starting at $159</div>
-    </button>
+      <p class="text-sm text-gray-600 mb-2">Get full insights with analytics setup and reporting.</p>
+      <div class="text-green-700 font-semibold">Starting at $149</div>
+    </a>
 
     <!-- Service 9 -->
-    <button onclick="openModal('Security headers & GDPR compliance implementation', '$229')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#gdpr" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
-        <span class="text-gray-800 font-medium">Security headers & GDPR compliance implementation</span>
+        <span class="text-gray-800 font-medium">Security headers & GDPR compliance</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Ensure compliance and security with modern best practices.</p>
-      <div class="text-green-700 font-semibold">Starting at $229</div>
-    </button>
+      <p class="text-sm text-gray-600 mb-2">Protect data & ensure GDPR compliance for your store.</p>
+      <div class="text-green-700 font-semibold">Starting at $259</div>
+    </a>
 
     <!-- Service 10 -->
-    <button onclick="openModal('24/7 merchant support & emergency response', '$399')" 
-      class="block p-4 border rounded-xl hover:shadow-lg transition bg-white text-left w-full">
+    <a href="#support" class="block p-4 border rounded-xl hover:shadow-lg transition bg-white">
       <div class="flex items-center gap-3 mb-2">
         <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
           <i class="fa-solid fa-check text-green-600 text-xs"></i>
         </div>
         <span class="text-gray-800 font-medium">24/7 merchant support & emergency response</span>
       </div>
-      <p class="text-sm text-gray-600 mb-2">Get round-the-clock support and emergency fixes.</p>
-      <div class="text-green-700 font-semibold">Starting at $399</div>
-    </button>
+      <p class="text-sm text-gray-600 mb-2">Round-the-clock support to handle urgent store issues.</p>
+      <div class="text-green-700 font-semibold">Starting at $99/monthly</div>
+    </a>
+
   </div>
 </div>
 
-<!-- Modal -->
-<div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-  <div class="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 relative">
-    <!-- Close Button -->
-    <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-      ✖
-    </button>
-    <!-- Dynamic Title -->
-    <h2 id="modalServiceTitle" class="text-xl font-semibold mb-1 text-gray-800"></h2>
-    <p id="modalServicePrice" class="text-green-700 font-medium mb-4"></p>
-
-    <!-- Form -->
-    <form id="serviceForm" class="space-y-4">
-      <input type="hidden" id="serviceName" name="service">
-      <input type="hidden" id="servicePrice" name="price">
-
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Name</label>
-        <input type="text" id="userName" class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200" required>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" id="userEmail" class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200" required>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Message</label>
-        <textarea id="userMessage" class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200" rows="3"></textarea>
-      </div>
-      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
-        Submit via WhatsApp
-      </button>
-    </form>
-  </div>
-</div>
-
-<script>
-  // ====== IMPORTANT ======
-  // Replace with your WhatsApp number in international format (no +, no leading zeros)
-  const phoneNumber = "2347037809209"; // Example: Nigeria number
-
-  // open modal and populate service info
-  function openModal(serviceName, price) {
-    const modal = document.getElementById('serviceModal');
-    document.getElementById('modalServiceTitle').innerText = "Request: " + serviceName;
-    document.getElementById('modalServicePrice').innerText = price || "";
-    document.getElementById('serviceName').value = serviceName;
-    document.getElementById('servicePrice').value = price || "";
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.classList.add('overflow-hidden'); 
-    setTimeout(() => document.getElementById('userName').focus(), 80);
-  }
-
-  function closeModal() {
-    const modal = document.getElementById('serviceModal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.classList.remove('overflow-hidden');
-  }
-
-  // close when clicking outside modal content
-  document.getElementById('serviceModal').addEventListener('click', function (e) {
-    if (e.target === this) closeModal();
-  });
-
-  // close on Escape key
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !document.getElementById('serviceModal').classList.contains('hidden')) {
-      closeModal();
-    }
-  });
-
-  // Handle form submit -> redirect to WhatsApp with prefilled message
-  document.getElementById('serviceForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const service = document.getElementById('serviceName').value.trim();
-    const price = document.getElementById('servicePrice').value.trim();
-    const name = document.getElementById('userName').value.trim();
-    const email = document.getElementById('userEmail').value.trim();
-    const message = document.getElementById('userMessage').value.trim();
-
-    const whatsappMessage = [
-      "*Service Request*",
-      "",
-      `Service: ${service}`,
-      `Price: ${price}`,
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Message: ${message || "-"}`,
-    ].join("\n");
-
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-
-    closeModal();
-    window.open(url, "_blank");
-  });
-</script>
-
-
-    <!-- Premium Ticker with Pro Slideshow + Captions -->
-<section class="ticker-section">
-  <!-- Ticker text -->
-  <div class="ticker-wrapper">
-    <div class="ticker">    
-      🚀 Boost your Shopify store performance! • ⚡ Resolve compliance issues instantly! • 📈 Increase your SEO visibility and sales! • 💡 Expert marketing guidance!
-    </div>
-  </div>
 
   <!-- Pro Fading Images with Captions -->
   <div class="fade-images">
@@ -1015,6 +906,76 @@ h1, h2, h3, h4 {
     </div>
   </div>
 </section>
+
+   <!-- Premium Wix-Style Footer (No Newsletter) -->
+<footer class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-300 pt-16 pb-10 px-6">
+  <!-- Glow Effect -->
+  <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 via-transparent to-blue-500/10 blur-3xl"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- Brand -->
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg flex items-center justify-center shadow-lg">
+          <span class="text-white font-bold text-lg">JM</span>
+        </div>
+        <h2 class="text-xl font-bold text-white">Juan Manuel</h2>
+      </div>
+      <p class="text-gray-400 text-sm leading-relaxed">
+        Helping Shopify merchants resolve compliance challenges and achieve sustainable growth with tailored strategies.
+      </p>
+    </div>
+
+    <!-- Services -->
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-4">Services</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#" class="hover:text-white transition">Compliance & Audit</a></li>
+        <li><a href="#" class="hover:text-white transition">SEO Optimization</a></li>
+        <li><a href="#" class="hover:text-white transition">Conversion Optimization</a></li>
+        <li><a href="#" class="hover:text-white transition">Custom Development</a></li>
+      </ul>
+    </div>
+
+    <!-- Company -->
+    <div>
+      <h3 class="text-white font-semibold text-lg mb-4">Company</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-gray-700 mt-10 pt-6 relative z-10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- Social Icons -->
+    <div class="flex gap-4">
+      <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-green-500 transition">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-sky-400 transition">
+        <i class="fa-brands fa-twitter"></i>
+      </a>
+      <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-500 transition">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
+    </div>
+
+    <!-- Legal -->
+    <div class="text-xs text-gray-500 text-center md:text-right">
+      © 2025 Juan Manuel. All rights reserved. | 
+      <a href="#" class="hover:text-gray-300">Terms</a> · 
+      <a href="#" class="hover:text-gray-300">Privacy</a>
+    </div>
+  </div>
+</footer>
+
 
 <style>
 /* Layout wrapper */
@@ -1319,8 +1280,6 @@ function handleSubmit(e){
 
 </body>
 </html>
-
-
 
 
 
