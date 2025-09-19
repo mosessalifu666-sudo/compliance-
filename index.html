@@ -711,7 +711,14 @@ h1, h2, h3, h4 {
           </div>
         </div>
       </section>
-<!-- Professional Store Growth Services -->
+      
+  <title>Store Growth Services</title>
+  <script src="https://kit.fontawesome.com/your-fa-kit.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<!-- Services Section -->
 <section class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-black py-20 px-6">
   <div class="max-w-7xl mx-auto text-center">
     <!-- Heading -->
@@ -726,7 +733,7 @@ h1, h2, h3, h4 {
 
     <!-- Services Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      
+
       <!-- Card -->
       <div class="group bg-gray-800 border border-gray-700 p-8 rounded-2xl hover:border-green-500 hover:shadow-2xl transition">
         <div class="mb-4 flex items-center justify-center w-14 h-14 rounded-full bg-green-500/10 group-hover:bg-green-500/20 transition">
@@ -734,7 +741,11 @@ h1, h2, h3, h4 {
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">Store Optimization</h3>
         <p class="text-gray-400 mb-4">Streamline navigation, enhance speed & UX, and create a frictionless buying journey.</p>
-        <span class="text-green-400 font-semibold">Starting at $299</span>
+        <span class="block text-green-400 font-semibold mb-4">Starting at $299</span>
+        <button onclick="openModal('Store Optimization','Starting at $299')" 
+                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
       </div>
 
       <!-- Card -->
@@ -744,7 +755,11 @@ h1, h2, h3, h4 {
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">Advanced SEO</h3>
         <p class="text-gray-400 mb-4">Technical audits, keyword strategies & backlinks to boost organic growth.</p>
-        <span class="text-green-400 font-semibold">Starting at $399</span>
+        <span class="block text-green-400 font-semibold mb-4">Starting at $399</span>
+        <button onclick="openModal('Advanced SEO','Starting at $399')" 
+                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
       </div>
 
       <!-- Card -->
@@ -754,7 +769,11 @@ h1, h2, h3, h4 {
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">CRO & A/B Testing</h3>
         <p class="text-gray-400 mb-4">Run data-driven experiments that increase conversions and customer retention.</p>
-        <span class="text-green-400 font-semibold">Starting at $349</span>
+        <span class="block text-green-400 font-semibold mb-4">Starting at $349</span>
+        <button onclick="openModal('CRO & A/B Testing','Starting at $349')" 
+                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
       </div>
 
       <!-- Card -->
@@ -764,7 +783,11 @@ h1, h2, h3, h4 {
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">Growth Marketing</h3>
         <p class="text-gray-400 mb-4">Leverage automation, loyalty flows & retargeting campaigns that scale sales.</p>
-        <span class="text-green-400 font-semibold">Starting at $279</span>
+        <span class="block text-green-400 font-semibold mb-4">Starting at $279</span>
+        <button onclick="openModal('Growth Marketing','Starting at $279')" 
+                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
       </div>
 
       <!-- Card -->
@@ -774,7 +797,11 @@ h1, h2, h3, h4 {
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">Shopify Plus Migration</h3>
         <p class="text-gray-400 mb-4">Enterprise-level migration with custom development & scalability features.</p>
-        <span class="text-green-400 font-semibold">Starting at $599</span>
+        <span class="block text-green-400 font-semibold mb-4">Starting at $599</span>
+        <button onclick="openModal('Shopify Plus Migration','Starting at $599')" 
+                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
       </div>
 
       <!-- Card -->
@@ -784,8 +811,13 @@ h1, h2, h3, h4 {
         </div>
         <h3 class="text-xl font-semibold text-white mb-2">Analytics & Reporting</h3>
         <p class="text-gray-400 mb-4">Track KPIs with GA4, dashboards & custom insights for smarter decisions.</p>
-        <span class="text-green-400 font-semibold">Starting at $199</span>
+        <span class="block text-green-400 font-semibold mb-4">Starting at $199</span>
+        <button onclick="openModal('Analytics & Reporting','Starting at $199')" 
+                class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+          Get Started
+        </button>
       </div>
+
     </div>
 
     <!-- CTA -->
@@ -794,19 +826,19 @@ h1, h2, h3, h4 {
         Ready to scale your store to the next level?
       </h3>
       <p class="text-gray-300 mb-6">Book a free consultation with our Shopify growth specialists today.</p>
-      <a href="#consultation" class="inline-block px-8 py-4 bg-green-500 text-black font-bold rounded-full hover:bg-green-400 transition">
+      <a href="javascript:void(0)" onclick="openModal('Free Consultation','No cost')" 
+         class="inline-block px-8 py-4 bg-green-500 text-black font-bold rounded-full hover:bg-green-400 transition">
         Book Free Consultation
       </a>
     </div>
   </div>
 </section>
-<!-- Modal -->
+
+<!-- Service Modal -->
 <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
   <div class="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 relative">
     <!-- Close Button -->
-    <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-      ✖
-    </button>
+    <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800">✖</button>
     <!-- Dynamic Title -->
     <h2 id="modalServiceTitle" class="text-xl font-semibold mb-1 text-gray-800"></h2>
     <p id="modalServicePrice" class="text-green-700 font-medium mb-4"></p>
@@ -828,7 +860,7 @@ h1, h2, h3, h4 {
         <label class="block text-sm font-medium text-gray-700">Message</label>
         <textarea id="userMessage" class="w-full border rounded-lg p-2 focus:ring focus:ring-green-200" rows="3"></textarea>
       </div>
-      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
         Submit via WhatsApp
       </button>
     </form>
@@ -836,66 +868,41 @@ h1, h2, h3, h4 {
 </div>
 
 <script>
-  // ====== IMPORTANT ======
-  // Replace with your WhatsApp number in international format (no +, no leading zeros)
-  const phoneNumber = "2347037809209"; // Example: Nigeria number
+  // Replace with your WhatsApp number (international format, no + or spaces)
+  const whatsappNumber = "2347037809209"; // Example: "15551234567"
 
-  // open modal and populate service info
-  function openModal(serviceName, price) {
-    const modal = document.getElementById('serviceModal');
-    document.getElementById('modalServiceTitle').innerText = "Request: " + serviceName;
-    document.getElementById('modalServicePrice').innerText = price || "";
-    document.getElementById('serviceName').value = serviceName;
-    document.getElementById('servicePrice').value = price || "";
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.classList.add('overflow-hidden'); 
-    setTimeout(() => document.getElementById('userName').focus(), 80);
+  // Open Modal with Service Info
+  function openModal(serviceName, servicePrice) {
+    document.getElementById("modalServiceTitle").innerText = serviceName;
+    document.getElementById("modalServicePrice").innerText = servicePrice;
+    document.getElementById("serviceName").value = serviceName;
+    document.getElementById("servicePrice").value = servicePrice;
+    document.getElementById("serviceModal").classList.remove("hidden");
+    document.getElementById("serviceModal").classList.add("flex");
   }
 
+  // Close Modal
   function closeModal() {
-    const modal = document.getElementById('serviceModal');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.classList.remove('overflow-hidden');
+    document.getElementById("serviceModal").classList.add("hidden");
+    document.getElementById("serviceModal").classList.remove("flex");
   }
 
-  // close when clicking outside modal content
-  document.getElementById('serviceModal').addEventListener('click', function (e) {
-    if (e.target === this) closeModal();
-  });
-
-  // close on Escape key
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !document.getElementById('serviceModal').classList.contains('hidden')) {
-      closeModal();
-    }
-  });
-
-  // Handle form submit -> redirect to WhatsApp with prefilled message
-  document.getElementById('serviceForm').addEventListener('submit', function (e) {
+  // Handle Form Submission
+  document.getElementById("serviceForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const service = document.getElementById('serviceName').value.trim();
-    const price = document.getElementById('servicePrice').value.trim();
-    const name = document.getElementById('userName').value.trim();
-    const email = document.getElementById('userEmail').value.trim();
-    const message = document.getElementById('userMessage').value.trim();
+    const service = document.getElementById("serviceName").value;
+    const price = document.getElementById("servicePrice").value;
+    const name = document.getElementById("userName").value;
+    const email = document.getElementById("userEmail").value;
+    const message = document.getElementById("userMessage").value;
 
-    const whatsappMessage = [
-      "*Service Request*",
-      "",
-      `Service: ${service}`,
-      `Price: ${price}`,
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Message: ${message || "-"}`,
-    ].join("\n");
-
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappMessage = `Hello, I am interested in:\n\n📌 Service: ${service}\n💲 ${price}\n\n👤 Name: ${name}\n📧 Email: ${email}\n\n📝 Message: ${message}`;
+    
+    const url = `https://wa.me/2347037809209?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(url, "_blank");
 
     closeModal();
-    window.open(url, "_blank");
   });
 </script>
 
@@ -1447,6 +1454,7 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
 
 
