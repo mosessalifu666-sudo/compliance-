@@ -492,7 +492,7 @@ h1, h2, h3, h4 {
 
     <!-- Bio -->
     <p class="text-sm text-gray-700 leading-relaxed text-center max-w-2xl mx-auto animate-slideUp">
-       I partner with store owners to resolve compliance challenges and boost growth through targeted marketing, SEO, and performance optimization strategies. Share your case and take the first step.
+       I help with compliance challenges and boost growth through targeted marketing, SEO, and performance optimization strategies. Share your case and take the first step.
     </p>
 
     <!-- Contact Buttons -->
@@ -508,7 +508,10 @@ h1, h2, h3, h4 {
         <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></span>
         <i class="fa-brands fa-telegram"></i><span>Contact via Telegram</span>
       </button>
-
+ <button onclick="openForm('email')" class="w-full inline-flex items-center justify-center gap-3 bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-lg focus-ring font-semibold transition-all duration-200">
+          <i class="fa-solid fa-envelope"></i><span>Contact via Email</span>
+        </button>
+      </div>
 
 
     <!-- Stats -->
@@ -951,7 +954,7 @@ h1, h2, h3, h4 {
 
 <script>
   // Replace with your WhatsApp number (international format, no + or spaces)
-  const whatsappNumber = "2347037809209"; // Example: "15551234567"
+  const whatsappNumber = "2349135251130"; // Example: "15551234567"
 
   // Open Modal with Service Info
   function openModal(serviceName, servicePrice) {
@@ -981,7 +984,7 @@ h1, h2, h3, h4 {
 
     const whatsappMessage = `Hello, I am interested in:\n\n📌 Service: ${service}\n💲 ${price}\n\n👤 Name: ${name}\n📧 Email: ${email}\n\n📝 Message: ${message}`;
     
-    const url = `https://wa.me/2347037809209?text=${encodeURIComponent(whatsappMessage)}`;
+    const url = `https://wa.me/2349135251130?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(url, "_blank");
 
     closeModal();
@@ -1449,7 +1452,7 @@ setInterval(showNextImage, 5000); // 5s per slide
       👋 Hi — I help you with compliance, payments, SEO, marketing & sales. Start a chat and I'll guide you through.
     </div>
     <div class="px-6 pb-6 space-y-3">
-      <a href="https://wa.me/2347037809209" target="_blank" class="w-full block btn-shopify text-white py-3 rounded-lg text-center font-semibold">
+      <a href="https://wa.me/2349135251130" target="_blank" class="w-full block btn-shopify text-white py-3 rounded-lg text-center font-semibold">
         <i class="fa-brands fa-whatsapp mr-2"></i> Start Chat
       </a>
       <a href="https://t.me/JuanShopifyadvisor" target="_blank" class="w-full block btn-wix text-white py-3 rounded-lg text-center font-semibold">
@@ -1526,7 +1529,7 @@ function handleSubmit(e){
     'Message: ' + message
   );
 
-  if(method==='whatsapp') url='https://wa.me/2347037809209?text=' + body;
+  if(method==='whatsapp') url='https://wa.me/2349135251130?text=' + body;
   else if(method==='telegram') url='https://t.me/JuanShopifyadvisor'; // <- TELEGRAM LINK
   else if(method==='email') url='mailto:juan.shopifyagent@gmail.com?subject=Support Request&body=' + body;
 
@@ -1536,6 +1539,7 @@ function handleSubmit(e){
 
 </body>
 </html>
+
 
 
 
